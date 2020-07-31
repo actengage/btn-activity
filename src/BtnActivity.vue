@@ -260,7 +260,7 @@ export default {
 };
 </script>
 
-<style lang="postcss">
+<style>
 @keyframes btn-activity-in {
     0%, 100% {
         transform: scale(1);
@@ -284,32 +284,36 @@ export default {
     display: inline-flex;
     position: relative;
     transition: all calc(333ms / 2) ease-in;
+}
 
-    .activity-indicator {
-        opacity: 0;
-        position: absolute;
-        visibility: hidden;
-        transition: opacity 333ms ease-in;
-    }
+.btn-activity-top .activity-indicator,
+.btn-activity-bottom .activity-indicator,
+.btn-activity-left .activity-indicator,
+.btn-activity-right .activity-indicator {
+    opacity: 0;
+    position: absolute;
+    visibility: hidden;
+    transition: opacity 333ms ease-in;
 }
 
 .btn-activity-top,
 .btn-activity-bottom {
     flex-direction: column;
     align-items: center;
+}
 
-    .activity-indicator {
-        margin-left: auto;
-        margin-right: auto;
-    }
+.btn-activity-top .activity-indicator,
+.btn-activity-bottom .activity-indicator {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .btn-activity-top {
     flex-direction: column-reverse;
+}
 
-    .activity-indicator {
-        padding-bottom: 1em;
-    }
+.btn-activity-top .activity-indicator {
+    padding-bottom: 1em;
 }
 
 .btn-activity-bottom .activity-indicator {
@@ -324,10 +328,10 @@ export default {
 
 .btn-activity-left {
     flex-direction: row-reverse;
+}
 
-    .activity-indicator {
-        padding-right: 1em;
-    }
+.btn-activity-left .activity-indicator {
+    padding-right: 1em;
 }
 
 .btn-activity-right .activity-indicator {
@@ -337,20 +341,19 @@ export default {
 .btn-activity:not(.btn-link) {
     animation: btn-activity-in 333ms;
 }
+
 .btn-hide-activity:not(.btn-link) {
     animation: btn-activity-out 333ms;
 }
 
-.btn-activity {
-    &.btn-hide-activity .activity-indicator {
-        opacity: 0;
-    }
+.btn-activity.btn-hide-activity .activity-indicator {
+    opacity: 0;
+}
 
-    & .activity-indicator {
-        opacity: 1;
-        visibility: visible;
-        position: relative;
-        font-size: .55em;
-    }
+.btn-activity .activity-indicator {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    font-size: .55em;
 }
 </style>
