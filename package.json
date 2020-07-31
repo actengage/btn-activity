@@ -40,7 +40,6 @@
     "@vue-interface/btn": "^0.9.5",
     "@vue-interface/utils": "^0.9.12",
     "core-js": "^3.6.4",
-    "postcss-nested": "^4.2.3",
     "tailwindcss": "^1.6.0",
     "vue": "^2.6.11"
   },
