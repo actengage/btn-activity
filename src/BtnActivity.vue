@@ -278,9 +278,13 @@ export default {
 }
 
 .btn-activity-top,
+.btn.btn-activity-top,
 .btn-activity-bottom,
+.btn.btn-activity-bottom,
 .btn-activity-left,
-.btn-activity-right {
+.btn.btn-activity-left,
+.btn-activity-right,
+.btn.btn-activity-right {
     display: inline-flex;
     position: relative;
     transition: all calc(333ms / 2) ease-in;
