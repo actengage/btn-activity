@@ -2,7 +2,7 @@
   "name": "@vue-interface/btn-activity",
   "version": "0.9.7",
   "description": "A Vue activity button component.",
-  "main": "./dist/BtnActivity.umd.js",
+  "main": "./index.js",
   "scripts": {
     "watch": "npm run serve",
     "serve": "vue-cli-service build --target lib --name=BtnActivity ./main.vue --watch",
@@ -37,8 +37,8 @@
   },
   "homepage": "https://github.com/vue-interface/btn-activity/docs#readme",
   "dependencies": {
-    "@vue-interface/activity-indicator": "^0.10.10",
-    "@vue-interface/btn": "^0.9.10",
+    "@vue-interface/activity-indicator": "^0.10.12",
+    "@vue-interface/btn": "^0.9.11",
     "@vue-interface/utils": "^0.9.25",
     "core-js": "^3.6.4",
     "tailwindcss": "^1.8.12",
