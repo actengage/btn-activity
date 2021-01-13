@@ -19,7 +19,7 @@ register({
 
 const convertAnimationDelayToInt = function(delay) {
     const num = parseFloat(delay || 0, 10);
-    const matches = delay.match(/m?s/);
+    const matches = delay && delay.match(/m?s/);
     const unit = matches ? matches[0] : false;
 
     let milliseconds;
