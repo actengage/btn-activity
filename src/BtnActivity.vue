@@ -7,15 +7,7 @@
 </template>
 
 <script>
-import { isString } from '@vue-interface/utils';
-import { ActivityIndicator, register } from '@vue-interface/activity-indicator';
-import Dots from '@vue-interface/activity-indicator/src/types/Dots.vue';
-import Spinner from '@vue-interface/activity-indicator/src/types/Spinner.vue';
-
-register({
-    dots: Dots,
-    spinner: Spinner
-});
+import { ActivityIndicator } from '@vue-interface/activity-indicator';
 
 const convertAnimationDelayToInt = function(delay) {
     const num = parseFloat(delay || 0, 10);
@@ -172,7 +164,7 @@ export default {
         indicatorProps() {
             return Object.assign({
                 type: 'spinner'
-            }, (isString(this.indicator) ? {
+            }, (typeof this.indicator === 'string' ? {
                 type: this.indicator
             } : this.indicator) || {});
         }
