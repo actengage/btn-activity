@@ -1,6 +1,6 @@
 {
   "name": "@vue-interface/btn-activity",
-  "version": "0.9.12",
+  "version": "1.0.0",
   "description": "A Vue activity button component.",
   "files": [
     "index.js",
