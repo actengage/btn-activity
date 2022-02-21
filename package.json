@@ -7,7 +7,7 @@
     "dist",
     "src"
   ],
-  "main": "./dist/activity-indicator.umd.js",
+  "main": "./dist/btn-activity.umd.js",
   "module": "./index.js",
   "browserslist": "last 2 versions, > 0.5%, ie >= 11",
   "scripts": {
