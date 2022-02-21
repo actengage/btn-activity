@@ -37,9 +37,9 @@
   },
   "homepage": "https://github.com/vue-interface/btn-activity/docs#readme",
   "dependencies": {
-    "@vue-interface/activity-indicator": "^0.10.20",
-    "@vue-interface/btn": "^0.9.11",
-    "@vue-interface/utils": "^0.9.25",
+    "@vue-interface/activity-indicator": "^1.0.4",
+    "@vue-interface/btn": "^1.0.6",
+    "@vue-interface/utils": "^0.9.34",
     "core-js": "^3.6.4",
     "tailwindcss": "^1.8.12",
     "vue": "^2.6.12"

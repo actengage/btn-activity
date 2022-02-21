@@ -1,2 +1,5 @@
-import BtnActivity from './src/BtnActivity';
-export default BtnActivity;
+import BtnActivity from './src/BtnActivity.vue';
+
+export {
+    BtnActivity
+};

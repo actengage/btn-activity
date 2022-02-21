@@ -9,8 +9,8 @@
 <script>
 import { isString } from '@vue-interface/utils';
 import { ActivityIndicator, register } from '@vue-interface/activity-indicator';
-import Dots from '@vue-interface/activity-indicator/src/types/Dots';
-import Spinner from '@vue-interface/activity-indicator/src/types/Spinner';
+import Dots from '@vue-interface/activity-indicator/src/types/Dots.vue';
+import Spinner from '@vue-interface/activity-indicator/src/types/Spinner.vue';
 
 register({
     dots: Dots,
