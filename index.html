@@ -80,6 +80,30 @@
                 </div>
             </div>
 
+            <h2 class="text-2xl mt-6 mb-3">Activity Attribute</h2>
+
+            <btn-activity indicator="spinner" :activity="activity">
+                {{ activity ? 'On' : 'Off' }}
+            </btn-activity>
+
+            <h2 class="text-2xl mt-6 mb-3">Disabled</h2>
+
+            <btn-activity indicator="spinner" disabled @click="onClick">Spinner Top</btn-activity>
+
+            <h2 class="text-2xl mt-6 mb-3">Label Attribute</h2>
+
+            <btn-activity indicator="spinner" label="Some Text Here" @click="onClick"></btn-activity>
+
+            <h3 class="text-2xl mt-6 mb-3">Custom Element</h3>
+
+            <btn-activity tag="label" @click="onClick">Label</btn-activity>
+            <btn-activity tag="label" label="Some Text Here" disabled @click="onClick"></btn-activity>
+
+            <h3 class="text-2xl mt-6 mb-3">Click Event</h3>
+
+            <btn-activity class="mr-1" @click="onClick">Enabled</btn-activity>
+            <btn-activity disabled @click="onClick">Disabled</btn-activity>
+
         </div>
 
         <script type="module">
@@ -103,26 +127,27 @@
                     BtnActivity
                 },
                 methods: {
-                    onClick(event) {
-                        const child = this.$children.filter(child => {
-                            return child.$el === event.target;
-                        });
+                    onClick(event, { toggle }) {
+                        toggle();
 
-                        if(child[0]) {
-                            child[0].showActivity();
-
-                            setTimeout(() => {
-                                // child[0].hideActivity();
-                            }, 2000);
-                        }
+                        setTimeout(() => {
+                            toggle();
+                        }, 1000);
                     }
                 },
                 data() {
                     return {
-                        form: {
-                            checkbox: []
-                        }
+                        activity: false
                     }
+                },
+                mounted() {
+                    const toggle = () => setTimeout(() => {
+                        this.activity = !this.activity;
+
+                        toggle();
+                    }, 1000);
+
+                    toggle()
                 }
             });
         </script>

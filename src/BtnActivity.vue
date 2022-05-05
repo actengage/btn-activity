@@ -1,13 +1,21 @@
 <template>
-    <button :type="type" class="btn" :class="classes" @click="onClick">
-        <i v-if="icon" :class="icon" /> {{ label }}
-        <slot />
+    <btn
+        :active="active"
+        :block="block"
+        :disabled="disabled"
+        :size="size"
+        :tag="tag"
+        :variant="variant"
+        :class="classes"
+        @click="(e) => !disabled && $emit('click', e, this)">
+        <slot>{{ label }}</slot>
         <activity-indicator v-bind="indicatorProps" />
-    </button>
+    </btn>
 </template>
 
 <script>
 import { ActivityIndicator } from '@vue-interface/activity-indicator';
+import { Btn } from '@vue-interface/btn';
 
 const convertAnimationDelayToInt = function(delay) {
     const num = parseFloat(delay || 0, 10);
@@ -40,9 +48,10 @@ const animated = function(el, callback) {
 export default {
 
     name: 'BtnActivity',
-
+    
     components: {
-        ActivityIndicator
+        ActivityIndicator,
+        Btn
     },
 
     props: {
@@ -69,53 +78,11 @@ export default {
         block: Boolean,
 
         /**
-         * Make the button appear with the disabled state.
+         * Disable the button.
          *
          * @property {Boolean}
          */
         disabled: Boolean,
-
-        /**
-         * The button label. If not passed as a property, label must be passed
-         * inside the element's html.
-         *
-         * @property {String}
-         */
-        label: String,
-
-        /**
-         * The button icon
-         *
-         * @property {String}
-         */
-        icon: String,
-
-        /**
-         * The `type` attribute for the button element.
-         *
-         * @property {String}
-         */
-        type: String,
-
-        /**
-         * The size of the button.
-         *
-         * @property {String}
-         */
-        size: {
-            type: String,
-            default: 'md'
-        },
-
-        /**
-         * The variant of the button.
-         *
-         * @property {String}
-         */
-        variant: {
-            type: String,
-            default: 'primary'
-        },
 
         /**
          * The type of activity indicator inside the button.
@@ -128,6 +95,13 @@ export default {
         },
 
         /**
+         * The button label.
+         *
+         * @property {String}
+         */
+        label: String,
+
+        /**
          * The orientation of the activity button inside the button.
          *
          * @property {String}
@@ -135,7 +109,40 @@ export default {
         orientation: {
             type: String,
             default: 'right'
+        },
+
+        /**
+         * The size of the button.
+         *
+         * @property {String}
+         */
+        size: {
+            type: String,
+            default: 'md'
+        },
+
+        /**
+         * The HTML tag.
+         *
+         * @property {String}
+         */
+        tag: String,
+
+        /**
+         * The variant of the button.
+         *
+         * @property {String}
+         */
+        variant: {
+            type: String,
+            default: 'primary'
         }
+    },
+    
+    data() {
+        return {
+            currentActivity: this.activity
+        };
     },
 
     computed: {
@@ -149,12 +156,9 @@ export default {
             const classes = {
                 'disabled': this.disabled,
                 'active': this.active,
-                'btn-block': this.block,
                 'btn-activity': this.activity
             };
 
-            classes['btn-' + this.size.replace('btn-', '')] = !!this.size;
-            classes['btn-' + this.variant.replace('btn-', '')] = !!this.variant;
             classes['btn-activity-' + this.orientation.replace('btn-activity-', '')] = !!this.orientation;
             classes['btn-activity-indicator-' + this.indicatorProps.type.replace('btn-activity-indicator-', '')] = !!this.indicatorProps.type;
 
@@ -184,6 +188,12 @@ export default {
 
     },
 
+    mounted() {
+        if(this.activity) {
+            this.showActivity();
+        }
+    },
+
     methods: {
 
         /**
@@ -193,6 +203,7 @@ export default {
          */
         disable() {
             this.$el.disabled = true;
+            this.$el.classList.add('disabled');
         },
 
         /**
@@ -202,20 +213,7 @@ export default {
          */
         enable() {
             this.$el.disabled = false;
-        },
-
-        /**
-         * Show the activity indicator inside the button.
-         *
-         * @return void
-         */
-        showActivity() {
-            this.disable();
-
-            animated(this.$el, () => {
-                this.$el.classList.add('btn-activity');
-                this.$emit('show-activity');
-            });
+            this.$el.classList.remove('disabled');
         },
 
         /**
@@ -228,22 +226,38 @@ export default {
 
             animated(this.$el, () => {
                 this.enable();
+                this.currentActivity = false;
                 this.$el.classList.remove('btn-activity', 'btn-hide-activity');
                 this.$emit('hide-activity');
             });
         },
 
         /**
-         * The click callback function
+         * Show the activity indicator inside the button.
          *
          * @return void
          */
-        onClick(event) {
-            if(!this.disabled) {
-                this.$emit('click', event);
+        showActivity() {
+            this.currentActivity = true;
+            this.disable();
+
+            animated(this.$el, () => {
+                this.$el.classList.add('btn-activity');
+                this.$emit('show-activity');
+            });
+        },
+
+        /**
+         * Show the activity indicator inside the button.
+         *
+         * @return void
+         */
+        toggle() {
+            if(!this.currentActivity) {
+                this.showActivity();
             }
             else {
-                event.preventDefault();
+                this.hideActivity();
             }
         }
 

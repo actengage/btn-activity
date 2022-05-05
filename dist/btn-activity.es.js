@@ -128,7 +128,7 @@ function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 var _assign = function __assign() {
-  _assign = Object.assign || function __assign2(t) {
+  _assign = Object.assign || function __assign22(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
       s = arguments[i];
       for (var p in s) {
@@ -140,17 +140,17 @@ var _assign = function __assign() {
   };
   return _assign.apply(this, arguments);
 };
-function lowerCase(str) {
+function lowerCase$1(str) {
   return str.toLowerCase();
 }
-var DEFAULT_SPLIT_REGEXP = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g];
-var DEFAULT_STRIP_REGEXP = /[^A-Z0-9]+/gi;
-function noCase(input, options) {
+var DEFAULT_SPLIT_REGEXP$1 = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g];
+var DEFAULT_STRIP_REGEXP$1 = /[^A-Z0-9]+/gi;
+function noCase$1(input, options) {
   if (options === void 0) {
     options = {};
   }
-  var _a = options.splitRegexp, splitRegexp = _a === void 0 ? DEFAULT_SPLIT_REGEXP : _a, _b = options.stripRegexp, stripRegexp = _b === void 0 ? DEFAULT_STRIP_REGEXP : _b, _c = options.transform, transform = _c === void 0 ? lowerCase : _c, _d = options.delimiter, delimiter = _d === void 0 ? " " : _d;
-  var result = replace(replace(input, splitRegexp, "$1\0$2"), stripRegexp, "\0");
+  var _a = options.splitRegexp, splitRegexp = _a === void 0 ? DEFAULT_SPLIT_REGEXP$1 : _a, _b = options.stripRegexp, stripRegexp = _b === void 0 ? DEFAULT_STRIP_REGEXP$1 : _b, _c = options.transform, transform = _c === void 0 ? lowerCase$1 : _c, _d = options.delimiter, delimiter = _d === void 0 ? " " : _d;
+  var result = replace$1(replace$1(input, splitRegexp, "$1\0$2"), stripRegexp, "\0");
   var start = 0;
   var end = result.length;
   while (result.charAt(start) === "\0") {
@@ -161,26 +161,26 @@ function noCase(input, options) {
   }
   return result.slice(start, end).split("\0").map(transform).join(delimiter);
 }
-function replace(input, re, value) {
+function replace$1(input, re, value) {
   if (re instanceof RegExp)
     return input.replace(re, value);
   return re.reduce(function(input2, re2) {
     return input2.replace(re2, value);
   }, input);
 }
-function dotCase(input, options) {
+function dotCase$1(input, options) {
   if (options === void 0) {
     options = {};
   }
-  return noCase(input, _assign({
+  return noCase$1(input, _assign({
     delimiter: "."
   }, options));
 }
-function paramCase(input, options) {
+function paramCase$1(input, options) {
   if (options === void 0) {
     options = {};
   }
-  return dotCase(input, _assign({
+  return dotCase$1(input, _assign({
     delimiter: "-"
   }, options));
 }
@@ -196,17 +196,9 @@ var ComponentRegistry = /* @__PURE__ */ function() {
     });
   }
   _createClass(ComponentRegistry2, [{
-    key: "validate",
-    value: function validate(value) {
-      if (_typeof(value) === "object" || typeof value === "function") {
-        return value;
-      }
-      throw new Error("Invalid data type `".concat(_typeof(value), "`. Should be type `object` or `function`."));
-    }
-  }, {
     key: "get",
     value: function get(name) {
-      var match = this.components[name = paramCase(name)];
+      var match = this.components[name = paramCase$1(name)];
       if (match) {
         return match;
       }
@@ -219,17 +211,17 @@ var ComponentRegistry = /* @__PURE__ */ function() {
       if (_typeof(name) === "object") {
         Object.entries(name).forEach(function(_ref3) {
           var _ref4 = _slicedToArray(_ref3, 2), name2 = _ref4[0], module = _ref4[1];
-          _this2.register(paramCase(name2), module);
+          _this2.register(paramCase$1(name2), module);
         });
         return this;
       }
-      this.components[paramCase(name)] = this.validate(value);
+      this.components[paramCase$1(name)] = value;
       return this;
     }
   }, {
     key: "remove",
     value: function remove(name) {
-      delete this.components[paramCase(name)];
+      delete this.components[paramCase$1(name)];
       return this;
     }
   }, {
@@ -248,13 +240,13 @@ function factory() {
   return _construct(ComponentRegistry, args);
 }
 const registry = factory();
-var render$1 = function() {
+var render$2 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _c("div", { staticClass: "activity-indicator", class: _vm.classes, style: _vm.style }, [_c("div", { staticClass: "activity-indicator-content" }, [_c(_vm.component, { tag: "component", staticClass: "mx-auto" }), _vm.label ? _c("div", { staticClass: "activity-indicator-label" }, [_vm._v(" " + _vm._s(_vm.label) + " ")]) : _vm._e()], 1)]);
 };
-var staticRenderFns$1 = [];
+var staticRenderFns$2 = [];
 var ActivityIndicator_vue_vue_type_style_index_0_lang = "";
 function normalizeComponent(scriptExports, render2, staticRenderFns2, functionalTemplate, injectStyles, scopeId, moduleIdentifier, shadowMode) {
   var options = typeof scriptExports === "function" ? scriptExports.options : scriptExports;
@@ -310,7 +302,7 @@ function normalizeComponent(scriptExports, render2, staticRenderFns2, functional
 function unit(value, uom = "px") {
   return value !== null && value !== void 0 && value !== false && isFinite(value) ? `${value}${uom}` : value;
 }
-const __vue2_script$1 = {
+const __vue2_script$2 = {
   name: "ActivityIndicator",
   props: {
     absolute: Boolean,
@@ -369,15 +361,15 @@ const __vue2_script$1 = {
     }
   }
 };
-const __cssModules$1 = {};
-var __component__$1 = /* @__PURE__ */ normalizeComponent(__vue2_script$1, render$1, staticRenderFns$1, false, __vue2_injectStyles$1, null, null, null);
-function __vue2_injectStyles$1(context) {
-  for (let o in __cssModules$1) {
-    this[o] = __cssModules$1[o];
+const __cssModules$2 = {};
+var __component__$2 = /* @__PURE__ */ normalizeComponent(__vue2_script$2, render$2, staticRenderFns$2, false, __vue2_injectStyles$2, null, null, null);
+function __vue2_injectStyles$2(context) {
+  for (let o in __cssModules$2) {
+    this[o] = __cssModules$2[o];
   }
 }
 var ActivityIndicator = /* @__PURE__ */ function() {
-  return __component__$1.exports;
+  return __component__$2.exports;
 }();
 var Chase_vue_vue_type_style_index_0_lang = "";
 var CircleFade_vue_vue_type_style_index_0_lang = "";
@@ -393,11 +385,195 @@ var Spotify_vue_vue_type_style_index_0_lang = "";
 var Square_vue_vue_type_style_index_0_lang = "";
 var SquareFold_vue_vue_type_style_index_0_lang = "";
 var SquareOrbit_vue_vue_type_style_index_0_lang = "";
-var render = function() {
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+var __assign2 = function() {
+  __assign2 = Object.assign || function __assign22(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+      for (var p in s)
+        if (Object.prototype.hasOwnProperty.call(s, p))
+          t[p] = s[p];
+    }
+    return t;
+  };
+  return __assign2.apply(this, arguments);
+};
+function lowerCase(str) {
+  return str.toLowerCase();
+}
+var DEFAULT_SPLIT_REGEXP = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g];
+var DEFAULT_STRIP_REGEXP = /[^A-Z0-9]+/gi;
+function noCase(input, options) {
+  if (options === void 0) {
+    options = {};
+  }
+  var _a = options.splitRegexp, splitRegexp = _a === void 0 ? DEFAULT_SPLIT_REGEXP : _a, _b = options.stripRegexp, stripRegexp = _b === void 0 ? DEFAULT_STRIP_REGEXP : _b, _c = options.transform, transform = _c === void 0 ? lowerCase : _c, _d = options.delimiter, delimiter = _d === void 0 ? " " : _d;
+  var result = replace(replace(input, splitRegexp, "$1\0$2"), stripRegexp, "\0");
+  var start = 0;
+  var end = result.length;
+  while (result.charAt(start) === "\0")
+    start++;
+  while (result.charAt(end - 1) === "\0")
+    end--;
+  return result.slice(start, end).split("\0").map(transform).join(delimiter);
+}
+function replace(input, re, value) {
+  if (re instanceof RegExp)
+    return input.replace(re, value);
+  return re.reduce(function(input2, re2) {
+    return input2.replace(re2, value);
+  }, input);
+}
+function dotCase(input, options) {
+  if (options === void 0) {
+    options = {};
+  }
+  return noCase(input, __assign2({
+    delimiter: "."
+  }, options));
+}
+function paramCase(input, options) {
+  if (options === void 0) {
+    options = {};
+  }
+  return dotCase(input, __assign2({
+    delimiter: "-"
+  }, options));
+}
+var Sizeable = {
+  props: {
+    size: String,
+    sizePrefix: {
+      type: String,
+      default() {
+        return this.$options.name;
+      }
+    }
+  },
+  computed: {
+    sizeableClassPrefix() {
+      return this.sizePrefix && paramCase(this.sizePrefix);
+    },
+    sizeableClass() {
+      if (!this.size || !this.sizeableClassPrefix) {
+        return "";
+      }
+      return `${this.sizeableClassPrefix}-${this.size}`;
+    }
+  }
+};
+var Variant = {
+  props: {
+    variant: String,
+    variantPrefix: {
+      type: String,
+      default() {
+        return this.$options.name && this.$options.name.toLowerCase();
+      }
+    }
+  },
+  computed: {
+    variantClassPrefix() {
+      return this.variantPrefix;
+    },
+    variantClass() {
+      if (!this.variant || !this.variantClassPrefix) {
+        return "";
+      }
+      return `${this.variantClassPrefix}-${this.variant}`;
+    }
+  }
+};
+var render$1 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("button", { staticClass: "btn", class: _vm.classes, attrs: { "type": _vm.type }, on: { "click": _vm.onClick } }, [_vm.icon ? _c("i", { class: _vm.icon }) : _vm._e(), _vm._v(" " + _vm._s(_vm.label) + " "), _vm._t("default"), _c("activity-indicator", _vm._b({}, "activity-indicator", _vm.indicatorProps, false))], 2);
+  return _c(_vm.component, { tag: "component", class: _vm.classes, attrs: { "disabled": _vm.disabled, "role": "button" }, on: { "click": function($event) {
+    !_vm.disabled && _vm.$emit("click", $event);
+  } } }, [_vm._t("default", function() {
+    return [_vm._v(_vm._s(_vm.label))];
+  })], 2);
+};
+var staticRenderFns$1 = [];
+const __vue2_script$1 = {
+  name: "Btn",
+  mixins: [
+    Sizeable,
+    Variant
+  ],
+  props: {
+    active: Boolean,
+    block: Boolean,
+    disabled: Boolean,
+    label: String,
+    outline: Boolean,
+    tag: String,
+    variant: {
+      type: String,
+      default: "primary"
+    }
+  },
+  computed: {
+    classes() {
+      return [
+        "btn",
+        this.variantClass,
+        this.sizeableClass,
+        this.active && "active",
+        this.block && "btn-block",
+        this.disabled && "disabled"
+      ];
+    },
+    component() {
+      if (this.tag) {
+        return this.tag;
+      }
+      if (this.$attrs.to) {
+        return "router-link";
+      }
+      if (this.$attrs.href) {
+        return "a";
+      }
+      return "button";
+    },
+    variantClassPrefix() {
+      return this.variantPrefix + (this.outline ? "-outline" : "");
+    }
+  }
+};
+const __cssModules$1 = {};
+var __component__$1 = /* @__PURE__ */ normalizeComponent(__vue2_script$1, render$1, staticRenderFns$1, false, __vue2_injectStyles$1, null, null, null);
+function __vue2_injectStyles$1(context) {
+  for (let o in __cssModules$1) {
+    this[o] = __cssModules$1[o];
+  }
+}
+var Btn = /* @__PURE__ */ function() {
+  return __component__$1.exports;
+}();
+var render = function() {
+  var this$1$1 = this;
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("btn", { class: _vm.classes, attrs: { "active": _vm.active, "block": _vm.block, "disabled": _vm.disabled, "size": _vm.size, "tag": _vm.tag, "variant": _vm.variant }, on: { "click": function(e) {
+    return !_vm.disabled && _vm.$emit("click", e, this$1$1);
+  } } }, [_vm._t("default", function() {
+    return [_vm._v(_vm._s(_vm.label))];
+  }), _c("activity-indicator", _vm._b({}, "activity-indicator", _vm.indicatorProps, false))], 2);
 };
 var staticRenderFns = [];
 var BtnActivity_vue_vue_type_style_index_0_lang = "";
@@ -426,43 +602,45 @@ const animated = function(el, callback) {
 const __vue2_script = {
   name: "BtnActivity",
   components: {
-    ActivityIndicator
+    ActivityIndicator,
+    Btn
   },
   props: {
     active: Boolean,
     activity: Boolean,
     block: Boolean,
     disabled: Boolean,
-    label: String,
-    icon: String,
-    type: String,
-    size: {
-      type: String,
-      default: "md"
-    },
-    variant: {
-      type: String,
-      default: "primary"
-    },
     indicator: {
       type: [Object, String],
       default: "spinner"
     },
+    label: String,
     orientation: {
       type: String,
       default: "right"
+    },
+    size: {
+      type: String,
+      default: "md"
+    },
+    tag: String,
+    variant: {
+      type: String,
+      default: "primary"
     }
+  },
+  data() {
+    return {
+      currentActivity: this.activity
+    };
   },
   computed: {
     classes() {
       const classes = {
         "disabled": this.disabled,
         "active": this.active,
-        "btn-block": this.block,
         "btn-activity": this.activity
       };
-      classes["btn-" + this.size.replace("btn-", "")] = !!this.size;
-      classes["btn-" + this.variant.replace("btn-", "")] = !!this.variant;
       classes["btn-activity-" + this.orientation.replace("btn-activity-", "")] = !!this.orientation;
       classes["btn-activity-indicator-" + this.indicatorProps.type.replace("btn-activity-indicator-", "")] = !!this.indicatorProps.type;
       return classes;
@@ -484,33 +662,42 @@ const __vue2_script = {
       }
     }
   },
+  mounted() {
+    if (this.activity) {
+      this.showActivity();
+    }
+  },
   methods: {
     disable() {
       this.$el.disabled = true;
+      this.$el.classList.add("disabled");
     },
     enable() {
       this.$el.disabled = false;
+      this.$el.classList.remove("disabled");
+    },
+    hideActivity() {
+      this.$el.classList.add("btn-hide-activity");
+      animated(this.$el, () => {
+        this.enable();
+        this.currentActivity = false;
+        this.$el.classList.remove("btn-activity", "btn-hide-activity");
+        this.$emit("hide-activity");
+      });
     },
     showActivity() {
+      this.currentActivity = true;
       this.disable();
       animated(this.$el, () => {
         this.$el.classList.add("btn-activity");
         this.$emit("show-activity");
       });
     },
-    hideActivity() {
-      this.$el.classList.add("btn-hide-activity");
-      animated(this.$el, () => {
-        this.enable();
-        this.$el.classList.remove("btn-activity", "btn-hide-activity");
-        this.$emit("hide-activity");
-      });
-    },
-    onClick(event) {
-      if (!this.disabled) {
-        this.$emit("click", event);
+    toggle() {
+      if (!this.currentActivity) {
+        this.showActivity();
       } else {
-        event.preventDefault();
+        this.hideActivity();
       }
     }
   }
