@@ -1,4 +1,4 @@
-import { openBlock as c, createElementBlock as d, normalizeClass as m, normalizeStyle as $, createElementVNode as k, createBlock as P, resolveDynamicComponent as z, createCommentVNode as p, toDisplayString as S, resolveComponent as B, createTextVNode as E, renderSlot as D, createVNode as N, normalizeProps as O, guardReactiveProps as R } from "vue";
+import { openBlock as c, createElementBlock as p, normalizeClass as z, normalizeStyle as R, createElementVNode as N, createBlock as m, resolveDynamicComponent as w, createCommentVNode as b, toDisplayString as f, mergeProps as O, withCtx as $, renderSlot as A, createTextVNode as B, resolveComponent as x, createVNode as D, normalizeProps as L, guardReactiveProps as j } from "vue";
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -13,81 +13,81 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
-var u = function() {
-  return u = Object.assign || function(e) {
+var h = function() {
+  return h = Object.assign || function(e) {
     for (var i, n = 1, s = arguments.length; n < s; n++) {
       i = arguments[n];
-      for (var r in i)
-        Object.prototype.hasOwnProperty.call(i, r) && (e[r] = i[r]);
+      for (var a in i)
+        Object.prototype.hasOwnProperty.call(i, a) && (e[a] = i[a]);
     }
     return e;
-  }, u.apply(this, arguments);
+  }, h.apply(this, arguments);
 };
-function j(t) {
+function T(t) {
   return t.toLowerCase();
 }
-var T = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g], F = /[^A-Z0-9]+/gi;
-function L(t, e) {
+var V = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g], F = /[^A-Z0-9]+/gi;
+function H(t, e) {
   e === void 0 && (e = {});
-  for (var i = e.splitRegexp, n = i === void 0 ? T : i, s = e.stripRegexp, r = s === void 0 ? F : s, o = e.transform, h = o === void 0 ? j : o, g = e.delimiter, C = g === void 0 ? " " : g, l = f(f(t, n, "$1\0$2"), r, "\0"), y = 0, v = l.length; l.charAt(y) === "\0"; )
-    y++;
-  for (; l.charAt(v - 1) === "\0"; )
-    v--;
-  return l.slice(y, v).split("\0").map(h).join(C);
+  for (var i = e.splitRegexp, n = i === void 0 ? V : i, s = e.stripRegexp, a = s === void 0 ? F : s, o = e.transform, _ = o === void 0 ? T : o, l = e.delimiter, E = l === void 0 ? " " : l, d = P(P(t, n, "$1\0$2"), a, "\0"), v = 0, y = d.length; d.charAt(v) === "\0"; )
+    v++;
+  for (; d.charAt(y - 1) === "\0"; )
+    y--;
+  return d.slice(v, y).split("\0").map(_).join(E);
 }
-function f(t, e, i) {
+function P(t, e, i) {
   return e instanceof RegExp ? t.replace(e, i) : e.reduce(function(n, s) {
     return n.replace(s, i);
   }, t);
 }
-function H(t, e) {
-  return e === void 0 && (e = {}), L(t, u({
+function I(t, e) {
+  return e === void 0 && (e = {}), H(t, h({
     delimiter: "."
   }, e));
 }
-function _(t, e) {
-  return e === void 0 && (e = {}), H(t, u({
+function u(t, e) {
+  return e === void 0 && (e = {}), I(t, h({
     delimiter: "-"
   }, e));
 }
-class w {
+class k {
   constructor(e = {}) {
     this.components = /* @__PURE__ */ new Map(), Object.entries(e).forEach(([i, n]) => {
       this.register(i, n);
     });
   }
   get(e) {
-    const i = this.components.get(e = _(e));
+    const i = this.components.get(e = u(e));
     if (i)
       return i;
     throw new Error(`"${e}" has not been registered yet!`);
   }
   register(e, i) {
     return typeof e == "object" ? (Object.entries(e).forEach(([n, s]) => {
-      this.register(_(n), s);
-    }), this) : (this.components.set(_(e), i), this);
+      this.register(u(n), s);
+    }), this) : (this.components.set(u(e), i), this);
   }
   remove(e) {
-    return this.components.delete(_(e)), this;
+    return this.components.delete(u(e)), this;
   }
   reset() {
     return this.components = /* @__PURE__ */ new Map(), this;
   }
 }
-function I(...t) {
-  return new w(...t);
+function W(...t) {
+  return new k(...t);
 }
-const b = I();
-const A = (t, e) => {
+const S = W();
+const g = (t, e) => {
   const i = t.__vccOpts || t;
   for (const [n, s] of e)
     i[n] = s;
   return i;
 };
-function a(t, e = "px") {
+function r(t, e = "px") {
   return t != null && t !== !1 && isFinite(t) ? `${t}${e}` : t;
 }
-const V = {
+const q = {
   name: "ActivityIndicator",
   props: {
     absolute: Boolean,
@@ -98,9 +98,9 @@ const V = {
       default: "md"
     },
     registry: {
-      type: w,
+      type: k,
       default() {
-        return b;
+        return S;
       }
     },
     type: {
@@ -127,12 +127,12 @@ const V = {
     },
     style() {
       return {
-        width: a(this.width),
-        maxWidth: a(this.maxWidth),
-        minWidth: a(this.minWidth),
-        height: a(this.height),
-        maxHeight: a(this.maxHeight),
-        minHeight: a(this.minHeight)
+        width: r(this.width),
+        maxWidth: r(this.maxWidth),
+        minWidth: r(this.minWidth),
+        height: r(this.height),
+        maxHeight: r(this.maxHeight),
+        minHeight: r(this.minHeight)
       };
     }
   },
@@ -142,30 +142,124 @@ const V = {
   },
   methods: {
     async component() {
-      let t = b.get(this.type);
+      let t = S.get(this.type);
       return t instanceof Promise ? t : (typeof t == "function" && (t = await t()), t.default ? t.default : t);
     }
   }
-}, W = { class: "activity-indicator-content" }, q = {
+}, Z = { class: "activity-indicator-content" }, G = {
   key: 1,
   class: "activity-indicator-label"
 };
-function Z(t, e, i, n, s, r) {
-  return c(), d("div", {
-    class: m(["activity-indicator", r.classes]),
-    style: $(r.style)
+function M(t, e, i, n, s, a) {
+  return c(), p("div", {
+    class: z(["activity-indicator", a.classes]),
+    style: R(a.style)
   }, [
-    k("div", W, [
-      t.is ? (c(), P(z(t.is()), {
+    N("div", Z, [
+      t.is ? (c(), m(w(t.is()), {
         key: 0,
         class: "mx-auto"
-      })) : p("", !0),
-      i.label ? (c(), d("div", q, S(i.label), 1)) : p("", !0)
+      })) : b("", !0),
+      i.label ? (c(), p("div", G, f(i.label), 1)) : b("", !0)
     ])
   ], 6);
 }
-const G = /* @__PURE__ */ A(V, [["render", Z]]);
-const M = function(t) {
+const U = /* @__PURE__ */ g(q, [["render", M]]);
+const X = {
+  props: {
+    componentPrefix: String,
+    size: String,
+    sizePrefix: String
+  },
+  computed: {
+    sizeableClassPrefix() {
+      return this.sizePrefix || this.componentPrefix;
+    },
+    hasSizeablePrefix() {
+      return this.size && !!this.size.match(
+        new RegExp(`^${this.sizeableClassPrefix}`)
+      );
+    },
+    sizeableClass() {
+      return this.size ? !this.sizeableClassPrefix || this.hasSizeablePrefix ? this.size : `${this.sizeableClassPrefix}-${this.size}` : "";
+    }
+  }
+}, J = {
+  props: {
+    componentPrefix: String,
+    variant: String,
+    variantPrefix: String
+  },
+  computed: {
+    variantClassPrefix() {
+      return this.variantPrefix || this.componentPrefix;
+    },
+    hasVariantPrefix() {
+      return this.variant && !!this.variant.match(
+        new RegExp(`^${this.variantClassPrefix}`)
+      );
+    },
+    variantClass() {
+      return this.variant ? !this.variantClassPrefix || this.hasVariantPrefix ? this.variant : `${this.variantClassPrefix}-${this.variant}` : "";
+    }
+  }
+}, K = {
+  name: "Btn",
+  mixins: [
+    X,
+    J
+  ],
+  props: {
+    active: Boolean,
+    block: Boolean,
+    componentPrefix: {
+      type: String,
+      default: "btn"
+    },
+    disabled: Boolean,
+    label: String,
+    outline: Boolean,
+    tag: String,
+    variant: {
+      type: String,
+      default: "primary"
+    }
+  },
+  computed: {
+    classes() {
+      return [
+        "btn",
+        this.variantClass,
+        this.sizeableClass,
+        this.active && "active",
+        this.block && "btn-block",
+        this.disabled && "disabled"
+      ];
+    },
+    component() {
+      return this.tag ? this.tag : this.$attrs.href ? "a" : "button";
+    },
+    variantClassPrefix() {
+      return (this.variantPrefix || this.componentPrefix) + (this.outline ? "-outline" : "");
+    }
+  }
+};
+function Q(t, e, i, n, s, a) {
+  return c(), m(w(a.component), O(t.$attrs, {
+    disabled: i.disabled,
+    class: a.classes,
+    role: "button"
+  }), {
+    default: $(() => [
+      A(t.$slots, "default", {}, () => [
+        B(f(i.label), 1)
+      ])
+    ]),
+    _: 3
+  }, 16, ["disabled", "class"]);
+}
+const Y = /* @__PURE__ */ g(K, [["render", Q]]);
+const tt = function(t) {
   const e = parseFloat(t || 0, 10), i = t && t.match(/m?s/), n = i ? i[0] : !1;
   let s;
   switch (n) {
@@ -178,50 +272,54 @@ const M = function(t) {
       break;
   }
   return s || 0;
-}, x = function(t, e) {
+}, C = function(t, e) {
   const i = (t.ownerDocument || document).defaultView;
   setTimeout(() => {
     e.apply();
-  }, M(i.getComputedStyle(t).animationDuration));
-}, U = {
+  }, tt(i.getComputedStyle(t).animationDuration));
+}, et = {
   name: "BtnActivity",
   components: {
-    ActivityIndicator: G
+    ActivityIndicator: U,
+    Btn: Y
   },
   props: {
     active: Boolean,
     activity: Boolean,
     block: Boolean,
     disabled: Boolean,
-    label: String,
-    icon: String,
-    type: String,
-    size: {
-      type: String,
-      default: "md"
-    },
-    variant: {
-      type: String,
-      default: "primary"
-    },
     indicator: {
       type: [Object, String],
       default: "spinner"
     },
+    label: String,
     orientation: {
       type: String,
       default: "right"
+    },
+    size: {
+      type: String,
+      default: "md"
+    },
+    tag: String,
+    variant: {
+      type: String,
+      default: "primary"
     }
+  },
+  data() {
+    return {
+      currentActivity: this.activity
+    };
   },
   computed: {
     classes() {
       const t = {
         disabled: this.disabled,
         active: this.active,
-        "btn-block": this.block,
         "btn-activity": this.activity
       };
-      return t["btn-" + this.size.replace("btn-", "")] = !!this.size, t["btn-" + this.variant.replace("btn-", "")] = !!this.variant, t["btn-activity-" + this.orientation.replace("btn-activity-", "")] = !!this.orientation, t["btn-activity-indicator-" + this.indicatorProps.type.replace("btn-activity-indicator-", "")] = !!this.indicatorProps.type, t;
+      return t["btn-activity-" + this.orientation.replace("btn-activity-", "")] = !!this.orientation, t["btn-activity-indicator-" + this.indicatorProps.type.replace("btn-activity-indicator-", "")] = !!this.indicatorProps.type, t;
     },
     indicatorProps() {
       return Object.assign({
@@ -236,45 +334,53 @@ const M = function(t) {
       t ? this.showActivity() : this.hideActivity();
     }
   },
+  mounted() {
+    this.activity && this.showActivity();
+  },
   methods: {
     disable() {
-      this.$el.disabled = !0;
+      this.$el.disabled = !0, this.$el.classList.add("disabled");
     },
     enable() {
-      this.$el.disabled = !1;
+      this.$el.disabled = !1, this.$el.classList.remove("disabled");
+    },
+    hideActivity() {
+      this.$el.classList.add("btn-hide-activity"), C(this.$el, () => {
+        this.enable(), this.currentActivity = !1, this.$el.classList.remove("btn-activity", "btn-hide-activity"), this.$emit("hide-activity");
+      });
     },
     showActivity() {
-      this.disable(), x(this.$el, () => {
+      this.currentActivity = !0, this.disable(), C(this.$el, () => {
         this.$el.classList.add("btn-activity"), this.$emit("show-activity");
       });
     },
-    hideActivity() {
-      this.$el.classList.add("btn-hide-activity"), x(this.$el, () => {
-        this.enable(), this.$el.classList.remove("btn-activity", "btn-hide-activity"), this.$emit("hide-activity");
-      });
-    },
-    onClick(t) {
-      this.disabled ? t.preventDefault() : this.$emit("click", t);
+    toggle() {
+      this.currentActivity ? this.hideActivity() : this.showActivity();
     }
   }
-}, X = ["type"];
-function J(t, e, i, n, s, r) {
-  const o = B("activity-indicator");
-  return c(), d("button", {
-    type: i.type,
-    class: m(["btn", r.classes]),
-    onClick: e[0] || (e[0] = (...h) => r.onClick && r.onClick(...h))
-  }, [
-    i.icon ? (c(), d("i", {
-      key: 0,
-      class: m(i.icon)
-    }, null, 2)) : p("", !0),
-    E(" " + S(i.label) + " ", 1),
-    D(t.$slots, "default"),
-    N(o, O(R(r.indicatorProps)), null, 16)
-  ], 10, X);
+};
+function it(t, e, i, n, s, a) {
+  const o = x("activity-indicator"), _ = x("btn");
+  return c(), m(_, {
+    active: i.active,
+    block: i.block,
+    disabled: i.disabled,
+    size: i.size,
+    tag: i.tag,
+    variant: i.variant,
+    class: z(a.classes),
+    onClick: e[0] || (e[0] = (l) => !i.disabled && t.$emit("click", l, this))
+  }, {
+    default: $(() => [
+      A(t.$slots, "default", {}, () => [
+        B(f(i.label), 1)
+      ]),
+      D(o, L(j(a.indicatorProps)), null, 16)
+    ]),
+    _: 3
+  }, 8, ["active", "block", "disabled", "size", "tag", "variant", "class"]);
 }
-const Q = /* @__PURE__ */ A(U, [["render", J]]);
+const st = /* @__PURE__ */ g(et, [["render", it]]);
 export {
-  Q as BtnActivity
+  st as BtnActivity
 };
