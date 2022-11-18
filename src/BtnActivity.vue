@@ -1,3 +1,17 @@
+<template>
+    <btn
+        :active="active"
+        :block="block"
+        :disabled="disabled"
+        :size="size"
+        :tag="tag"
+        :variant="variant"
+        :class="classes">
+        <slot>{{ label }}</slot>
+        <activity-indicator v-bind="indicatorProps" />
+    </btn>
+</template>
+
 <script lang="ts">
 import { ActivityIndicator } from "@vue-interface/activity-indicator";
 import { Btn } from "@vue-interface/btn";

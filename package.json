@@ -4,8 +4,7 @@
   "description": "A Vue activity button component.",
   "files": [
     "index.js",
-    "dist",
-    "src"
+    "dist"
   ],
   "main": "./dist/btn-activity.umd.js",
   "module": "./dist/btn-activity.es.js",

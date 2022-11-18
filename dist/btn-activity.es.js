@@ -1,8 +1,8 @@
-import { inject as v, openBlock as o, createElementBlock as c, normalizeClass as y, normalizeStyle as p, createElementVNode as b, createBlock as d, resolveDynamicComponent as u, createCommentVNode as l, toDisplayString as m, mergeProps as f, withCtx as g, renderSlot as x, createTextVNode as S } from "vue";
-function n(t, e = "px") {
+import { inject as P, openBlock as c, createElementBlock as h, normalizeClass as m, normalizeStyle as S, createElementVNode as z, createBlock as o, resolveDynamicComponent as y, createCommentVNode as d, toDisplayString as l, mergeProps as _, withCtx as b, renderSlot as f, createTextVNode as p, resolveComponent as u, createVNode as $, normalizeProps as C, guardReactiveProps as B } from "vue";
+function r(t, e = "px") {
   return t != null && t !== !1 && isFinite(t) ? `${t}${e}` : t;
 }
-const P = {
+const w = {
   props: {
     absolute: Boolean,
     center: Boolean,
@@ -31,7 +31,7 @@ const P = {
   }),
   setup(t) {
     return {
-      registryInstance: v(t.registry || "indicators")
+      registryInstance: P(t.registry || "indicators")
     };
   },
   computed: {
@@ -44,12 +44,12 @@ const P = {
     },
     style() {
       return {
-        width: n(this.width),
-        maxWidth: n(this.maxWidth),
-        minWidth: n(this.minWidth),
-        height: n(this.height),
-        maxHeight: n(this.maxHeight),
-        minHeight: n(this.minHeight)
+        width: r(this.width),
+        maxWidth: r(this.maxWidth),
+        minWidth: r(this.minWidth),
+        height: r(this.height),
+        maxHeight: r(this.maxHeight),
+        minHeight: r(this.minHeight)
       };
     }
   },
@@ -63,27 +63,27 @@ const P = {
       return t instanceof Promise ? t : (typeof t == "function" && (t = await t()), t.default ? t.default : t);
     }
   }
-}, $ = (t, e) => {
+}, A = (t, e) => {
   const i = t.__vccOpts || t;
   for (const [a, s] of e)
     i[a] = s;
   return i;
-}, z = {
+}, k = {
   class: "activity-indicator-content"
-}, B = {
+}, N = {
   key: 1,
   class: "activity-indicator-label"
 };
-function C(t, e, i, a, s, r) {
-  return o(), c("div", {
-    class: y(["activity-indicator", r.classes]),
-    style: p(r.style)
-  }, [b("div", z, [t.is ? (o(), d(u(t.is()), {
+function H(t, e, i, a, s, n) {
+  return c(), h("div", {
+    class: m(["activity-indicator", n.classes]),
+    style: S(n.style)
+  }, [z("div", k, [t.is ? (c(), o(y(t.is()), {
     key: 0,
     class: "mx-auto"
-  })) : l("", !0), i.label ? (o(), c("div", B, m(i.label), 1)) : l("", !0)])], 6);
+  })) : d("", !0), i.label ? (c(), h("div", N, l(i.label), 1)) : d("", !0)])], 6);
 }
-const w = /* @__PURE__ */ $(P, [["render", C]]), A = {
+const O = /* @__PURE__ */ A(w, [["render", H]]), V = {
   props: {
     componentPrefix: String,
     size: String,
@@ -100,7 +100,7 @@ const w = /* @__PURE__ */ $(P, [["render", C]]), A = {
       return this.size ? !this.sizeableClassPrefix || this.hasSizeablePrefix ? this.size : `${this.sizeableClassPrefix}-${this.size}` : "";
     }
   }
-}, _ = {
+}, W = {
   props: {
     componentPrefix: String,
     variant: String,
@@ -117,9 +117,9 @@ const w = /* @__PURE__ */ $(P, [["render", C]]), A = {
       return this.variant ? !this.variantClassPrefix || this.hasVariantPrefix ? this.variant : `${this.variantClassPrefix}-${this.variant}` : "";
     }
   }
-}, k = {
+}, D = {
   name: "Btn",
-  mixins: [A, _],
+  mixins: [V, W],
   props: {
     active: Boolean,
     block: Boolean,
@@ -147,23 +147,23 @@ const w = /* @__PURE__ */ $(P, [["render", C]]), A = {
       return (this.variantPrefix || this.componentPrefix) + (this.outline ? "-outline" : "");
     }
   }
-}, N = (t, e) => {
+}, E = (t, e) => {
   const i = t.__vccOpts || t;
   for (const [a, s] of e)
     i[a] = s;
   return i;
 };
-function H(t, e, i, a, s, r) {
-  return o(), d(u(r.component), f(t.$attrs, {
+function L(t, e, i, a, s, n) {
+  return c(), o(y(n.component), _(t.$attrs, {
     disabled: i.disabled,
-    class: r.classes,
+    class: n.classes,
     role: "button"
   }), {
-    default: g(() => [x(t.$slots, "default", {}, () => [S(m(i.label), 1)])]),
+    default: b(() => [f(t.$slots, "default", {}, () => [p(l(i.label), 1)])]),
     _: 3
   }, 16, ["disabled", "class"]);
 }
-const W = /* @__PURE__ */ N(k, [["render", H]]), D = function(t) {
+const j = /* @__PURE__ */ E(D, [["render", L]]), I = function(t) {
   const e = parseFloat(t || 0), i = t && t.match(/m?s/), a = i ? i[0] : !1;
   let s;
   switch (a) {
@@ -176,17 +176,17 @@ const W = /* @__PURE__ */ N(k, [["render", H]]), D = function(t) {
       break;
   }
   return s || 0;
-}, h = function(t, e) {
+}, v = function(t, e) {
   const i = (t.ownerDocument || document).defaultView;
   setTimeout(
     e,
-    D(i == null ? void 0 : i.getComputedStyle(t).animationDuration)
+    I(i == null ? void 0 : i.getComputedStyle(t).animationDuration)
   );
-}, L = {
+}, R = {
   name: "BtnActivity",
   components: {
-    ActivityIndicator: w,
-    Btn: W
+    ActivityIndicator: O,
+    Btn: j
   },
   props: {
     active: Boolean,
@@ -257,12 +257,12 @@ const W = /* @__PURE__ */ N(k, [["render", H]]), D = function(t) {
       this.$el.disabled = !1, this.$el.classList.remove("disabled");
     },
     hideActivity() {
-      this.$el.classList.add("btn-hide-activity"), h(this.$el, () => {
+      this.$el.classList.add("btn-hide-activity"), v(this.$el, () => {
         this.enable(), this.currentActivity = !1, this.$el.classList.remove("btn-activity", "btn-hide-activity"), this.$emit("hide-activity");
       });
     },
     showActivity() {
-      this.currentActivity = !0, this.disable(), h(this.$el, () => {
+      this.currentActivity = !0, this.disable(), v(this.$el, () => {
         this.$el.classList.add("btn-activity"), this.$emit("show-activity");
       });
     },
@@ -271,6 +271,33 @@ const W = /* @__PURE__ */ N(k, [["render", H]]), D = function(t) {
     }
   }
 };
+const T = (t, e) => {
+  const i = t.__vccOpts || t;
+  for (const [a, s] of e)
+    i[a] = s;
+  return i;
+};
+function F(t, e, i, a, s, n) {
+  const g = u("activity-indicator"), x = u("btn");
+  return c(), o(x, {
+    active: i.active,
+    block: i.block,
+    disabled: i.disabled,
+    size: i.size,
+    tag: i.tag,
+    variant: i.variant,
+    class: m(n.classes)
+  }, {
+    default: b(() => [
+      f(t.$slots, "default", {}, () => [
+        p(l(i.label), 1)
+      ]),
+      $(g, C(B(n.indicatorProps)), null, 16)
+    ]),
+    _: 3
+  }, 8, ["active", "block", "disabled", "size", "tag", "variant", "class"]);
+}
+const G = /* @__PURE__ */ T(R, [["render", F]]);
 export {
-  L as BtnActivity
+  G as BtnActivity
 };
