@@ -68,9 +68,7 @@ const w = {
   for (const [a, s] of e)
     i[a] = s;
   return i;
-}, k = {
-  class: "activity-indicator-content"
-}, N = {
+}, k = { class: "activity-indicator-content" }, N = {
   key: 1,
   class: "activity-indicator-label"
 };
@@ -78,10 +76,15 @@ function H(t, e, i, a, s, n) {
   return c(), h("div", {
     class: m(["activity-indicator", n.classes]),
     style: S(n.style)
-  }, [z("div", k, [t.is ? (c(), o(y(t.is()), {
-    key: 0,
-    class: "mx-auto"
-  })) : d("", !0), i.label ? (c(), h("div", N, l(i.label), 1)) : d("", !0)])], 6);
+  }, [
+    z("div", k, [
+      t.is ? (c(), o(y(t.is()), {
+        key: 0,
+        class: "mx-auto"
+      })) : d("", !0),
+      i.label ? (c(), h("div", N, l(i.label), 1)) : d("", !0)
+    ])
+  ], 6);
 }
 const O = /* @__PURE__ */ A(w, [["render", H]]), V = {
   props: {
@@ -119,7 +122,10 @@ const O = /* @__PURE__ */ A(w, [["render", H]]), V = {
   }
 }, D = {
   name: "Btn",
-  mixins: [V, W],
+  mixins: [
+    V,
+    W
+  ],
   props: {
     active: Boolean,
     block: Boolean,
@@ -138,7 +144,14 @@ const O = /* @__PURE__ */ A(w, [["render", H]]), V = {
   },
   computed: {
     classes() {
-      return ["btn", this.variantClass, this.sizeableClass, this.active && "active", this.block && "btn-block", this.disabled && "disabled"];
+      return [
+        "btn",
+        this.variantClass,
+        this.sizeableClass,
+        this.active && "active",
+        this.block && "btn-block",
+        this.disabled && "disabled"
+      ];
     },
     component() {
       return this.tag ? this.tag : this.$attrs.href ? "a" : "button";
@@ -159,7 +172,11 @@ function L(t, e, i, a, s, n) {
     class: n.classes,
     role: "button"
   }), {
-    default: b(() => [f(t.$slots, "default", {}, () => [p(l(i.label), 1)])]),
+    default: b(() => [
+      f(t.$slots, "default", {}, () => [
+        p(l(i.label), 1)
+      ])
+    ]),
     _: 3
   }, 16, ["disabled", "class"]);
 }
