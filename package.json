@@ -8,7 +8,15 @@
     "src"
   ],
   "main": "./dist/btn-activity.umd.js",
-  "module": "./index.js",
+  "module": "./dist/btn-activity.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/btn-activit.es.js",
+      "require": "./dist/btn-activit.umd.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "browserslist": "last 2 versions, > 0.5%, ie >= 11",
   "scripts": {
     "dev": "vite",
@@ -39,8 +47,8 @@
   },
   "homepage": "https://github.com/vue-interface/btn-activity/docs#readme",
   "dependencies": {
-    "@vue-interface/activity-indicator": "^2.0.0-beta.0",
-    "@vue-interface/btn": "^3.0.0-beta.1"
+    "@vue-interface/activity-indicator": "^2.0.0-beta.4",
+    "@vue-interface/btn": "^3.0.0-beta.3"
   },
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.0",
@@ -55,6 +63,7 @@
     "postcss": "^8.4.6",
     "tailwindcss": "^3.0.18",
     "vite": "^3.1.7",
+    "vite-plugin-dts": "^1.7.1",
     "vue": "^3.2.40"
   }
 }

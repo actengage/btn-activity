@@ -1,94 +1,8 @@
-import { openBlock as c, createElementBlock as p, normalizeClass as z, normalizeStyle as R, createElementVNode as N, createBlock as m, resolveDynamicComponent as w, createCommentVNode as b, toDisplayString as f, mergeProps as O, withCtx as $, renderSlot as A, createTextVNode as B, resolveComponent as x, createVNode as D, normalizeProps as L, guardReactiveProps as j } from "vue";
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-var h = function() {
-  return h = Object.assign || function(e) {
-    for (var i, n = 1, s = arguments.length; n < s; n++) {
-      i = arguments[n];
-      for (var a in i)
-        Object.prototype.hasOwnProperty.call(i, a) && (e[a] = i[a]);
-    }
-    return e;
-  }, h.apply(this, arguments);
-};
-function T(t) {
-  return t.toLowerCase();
-}
-var V = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g], F = /[^A-Z0-9]+/gi;
-function H(t, e) {
-  e === void 0 && (e = {});
-  for (var i = e.splitRegexp, n = i === void 0 ? V : i, s = e.stripRegexp, a = s === void 0 ? F : s, o = e.transform, _ = o === void 0 ? T : o, l = e.delimiter, E = l === void 0 ? " " : l, d = P(P(t, n, "$1\0$2"), a, "\0"), v = 0, y = d.length; d.charAt(v) === "\0"; )
-    v++;
-  for (; d.charAt(y - 1) === "\0"; )
-    y--;
-  return d.slice(v, y).split("\0").map(_).join(E);
-}
-function P(t, e, i) {
-  return e instanceof RegExp ? t.replace(e, i) : e.reduce(function(n, s) {
-    return n.replace(s, i);
-  }, t);
-}
-function I(t, e) {
-  return e === void 0 && (e = {}), H(t, h({
-    delimiter: "."
-  }, e));
-}
-function u(t, e) {
-  return e === void 0 && (e = {}), I(t, h({
-    delimiter: "-"
-  }, e));
-}
-class k {
-  constructor(e = {}) {
-    this.components = /* @__PURE__ */ new Map(), Object.entries(e).forEach(([i, n]) => {
-      this.register(i, n);
-    });
-  }
-  get(e) {
-    const i = this.components.get(e = u(e));
-    if (i)
-      return i;
-    throw new Error(`"${e}" has not been registered yet!`);
-  }
-  register(e, i) {
-    return typeof e == "object" ? (Object.entries(e).forEach(([n, s]) => {
-      this.register(u(n), s);
-    }), this) : (this.components.set(u(e), i), this);
-  }
-  remove(e) {
-    return this.components.delete(u(e)), this;
-  }
-  reset() {
-    return this.components = /* @__PURE__ */ new Map(), this;
-  }
-}
-function W(...t) {
-  return new k(...t);
-}
-const S = W();
-const g = (t, e) => {
-  const i = t.__vccOpts || t;
-  for (const [n, s] of e)
-    i[n] = s;
-  return i;
-};
-function r(t, e = "px") {
+import { inject as v, openBlock as o, createElementBlock as c, normalizeClass as y, normalizeStyle as p, createElementVNode as b, createBlock as d, resolveDynamicComponent as u, createCommentVNode as l, toDisplayString as m, mergeProps as f, withCtx as g, renderSlot as x, createTextVNode as S } from "vue";
+function n(t, e = "px") {
   return t != null && t !== !1 && isFinite(t) ? `${t}${e}` : t;
 }
-const q = {
-  name: "ActivityIndicator",
+const P = {
   props: {
     absolute: Boolean,
     center: Boolean,
@@ -98,10 +12,8 @@ const q = {
       default: "md"
     },
     registry: {
-      type: k,
-      default() {
-        return S;
-      }
+      type: String,
+      default: "indicators"
     },
     type: {
       type: String,
@@ -117,6 +29,11 @@ const q = {
   data: () => ({
     is: null
   }),
+  setup(t) {
+    return {
+      registryInstance: v(t.registry || "indicators")
+    };
+  },
   computed: {
     classes() {
       return {
@@ -127,12 +44,12 @@ const q = {
     },
     style() {
       return {
-        width: r(this.width),
-        maxWidth: r(this.maxWidth),
-        minWidth: r(this.minWidth),
-        height: r(this.height),
-        maxHeight: r(this.maxHeight),
-        minHeight: r(this.minHeight)
+        width: n(this.width),
+        maxWidth: n(this.maxWidth),
+        minWidth: n(this.minWidth),
+        height: n(this.height),
+        maxHeight: n(this.maxHeight),
+        minHeight: n(this.minHeight)
       };
     }
   },
@@ -142,30 +59,31 @@ const q = {
   },
   methods: {
     async component() {
-      let t = S.get(this.type);
+      let t = this.registryInstance.get(this.type);
       return t instanceof Promise ? t : (typeof t == "function" && (t = await t()), t.default ? t.default : t);
     }
   }
-}, Z = { class: "activity-indicator-content" }, G = {
+}, $ = (t, e) => {
+  const i = t.__vccOpts || t;
+  for (const [a, s] of e)
+    i[a] = s;
+  return i;
+}, z = {
+  class: "activity-indicator-content"
+}, B = {
   key: 1,
   class: "activity-indicator-label"
 };
-function M(t, e, i, n, s, a) {
-  return c(), p("div", {
-    class: z(["activity-indicator", a.classes]),
-    style: R(a.style)
-  }, [
-    N("div", Z, [
-      t.is ? (c(), m(w(t.is()), {
-        key: 0,
-        class: "mx-auto"
-      })) : b("", !0),
-      i.label ? (c(), p("div", G, f(i.label), 1)) : b("", !0)
-    ])
-  ], 6);
+function C(t, e, i, a, s, r) {
+  return o(), c("div", {
+    class: y(["activity-indicator", r.classes]),
+    style: p(r.style)
+  }, [b("div", z, [t.is ? (o(), d(u(t.is()), {
+    key: 0,
+    class: "mx-auto"
+  })) : l("", !0), i.label ? (o(), c("div", B, m(i.label), 1)) : l("", !0)])], 6);
 }
-const U = /* @__PURE__ */ g(q, [["render", M]]);
-const X = {
+const w = /* @__PURE__ */ $(P, [["render", C]]), A = {
   props: {
     componentPrefix: String,
     size: String,
@@ -176,15 +94,13 @@ const X = {
       return this.sizePrefix || this.componentPrefix;
     },
     hasSizeablePrefix() {
-      return this.size && !!this.size.match(
-        new RegExp(`^${this.sizeableClassPrefix}`)
-      );
+      return this.size === void 0 ? !1 : !!this.size.match(new RegExp(`^${this.sizeableClassPrefix}`));
     },
     sizeableClass() {
       return this.size ? !this.sizeableClassPrefix || this.hasSizeablePrefix ? this.size : `${this.sizeableClassPrefix}-${this.size}` : "";
     }
   }
-}, J = {
+}, _ = {
   props: {
     componentPrefix: String,
     variant: String,
@@ -195,20 +111,15 @@ const X = {
       return this.variantPrefix || this.componentPrefix;
     },
     hasVariantPrefix() {
-      return this.variant && !!this.variant.match(
-        new RegExp(`^${this.variantClassPrefix}`)
-      );
+      return this.variant === void 0 ? !1 : !!this.variant.match(new RegExp(`^${this.variantClassPrefix}`));
     },
     variantClass() {
       return this.variant ? !this.variantClassPrefix || this.hasVariantPrefix ? this.variant : `${this.variantClassPrefix}-${this.variant}` : "";
     }
   }
-}, K = {
+}, k = {
   name: "Btn",
-  mixins: [
-    X,
-    J
-  ],
+  mixins: [A, _],
   props: {
     active: Boolean,
     block: Boolean,
@@ -227,14 +138,7 @@ const X = {
   },
   computed: {
     classes() {
-      return [
-        "btn",
-        this.variantClass,
-        this.sizeableClass,
-        this.active && "active",
-        this.block && "btn-block",
-        this.disabled && "disabled"
-      ];
+      return ["btn", this.variantClass, this.sizeableClass, this.active && "active", this.block && "btn-block", this.disabled && "disabled"];
     },
     component() {
       return this.tag ? this.tag : this.$attrs.href ? "a" : "button";
@@ -243,26 +147,26 @@ const X = {
       return (this.variantPrefix || this.componentPrefix) + (this.outline ? "-outline" : "");
     }
   }
+}, N = (t, e) => {
+  const i = t.__vccOpts || t;
+  for (const [a, s] of e)
+    i[a] = s;
+  return i;
 };
-function Q(t, e, i, n, s, a) {
-  return c(), m(w(a.component), O(t.$attrs, {
+function H(t, e, i, a, s, r) {
+  return o(), d(u(r.component), f(t.$attrs, {
     disabled: i.disabled,
-    class: a.classes,
+    class: r.classes,
     role: "button"
   }), {
-    default: $(() => [
-      A(t.$slots, "default", {}, () => [
-        B(f(i.label), 1)
-      ])
-    ]),
+    default: g(() => [x(t.$slots, "default", {}, () => [S(m(i.label), 1)])]),
     _: 3
   }, 16, ["disabled", "class"]);
 }
-const Y = /* @__PURE__ */ g(K, [["render", Q]]);
-const tt = function(t) {
-  const e = parseFloat(t || 0, 10), i = t && t.match(/m?s/), n = i ? i[0] : !1;
+const W = /* @__PURE__ */ N(k, [["render", H]]), D = function(t) {
+  const e = parseFloat(t || 0), i = t && t.match(/m?s/), a = i ? i[0] : !1;
   let s;
-  switch (n) {
+  switch (a) {
     case "s":
       s = e * 1e3;
       break;
@@ -272,16 +176,14 @@ const tt = function(t) {
       break;
   }
   return s || 0;
-}, C = function(t, e) {
+}, h = function(t, e) {
   const i = (t.ownerDocument || document).defaultView;
-  setTimeout(() => {
-    e.apply();
-  }, tt(i.getComputedStyle(t).animationDuration));
-}, et = {
+  setTimeout(e, D(i == null ? void 0 : i.getComputedStyle(t).animationDuration));
+}, L = {
   name: "BtnActivity",
   components: {
-    ActivityIndicator: U,
-    Btn: Y
+    ActivityIndicator: w,
+    Btn: W
   },
   props: {
     active: Boolean,
@@ -314,12 +216,13 @@ const tt = function(t) {
   },
   computed: {
     classes() {
-      const t = {
+      return {
         disabled: this.disabled,
         active: this.active,
-        "btn-activity": this.activity
+        "btn-activity": this.activity,
+        [`btn-activity-${this.orientation.replace("btn-activity-", "")}`]: !!this.orientation,
+        [`'btn-activity-indicator-${this.indicatorProps.type.replace("btn-activity-indicator-", "")}`]: !!this.indicatorProps.type
       };
-      return t["btn-activity-" + this.orientation.replace("btn-activity-", "")] = !!this.orientation, t["btn-activity-indicator-" + this.indicatorProps.type.replace("btn-activity-indicator-", "")] = !!this.indicatorProps.type, t;
     },
     indicatorProps() {
       return Object.assign({
@@ -345,12 +248,12 @@ const tt = function(t) {
       this.$el.disabled = !1, this.$el.classList.remove("disabled");
     },
     hideActivity() {
-      this.$el.classList.add("btn-hide-activity"), C(this.$el, () => {
+      this.$el.classList.add("btn-hide-activity"), h(this.$el, () => {
         this.enable(), this.currentActivity = !1, this.$el.classList.remove("btn-activity", "btn-hide-activity"), this.$emit("hide-activity");
       });
     },
     showActivity() {
-      this.currentActivity = !0, this.disable(), C(this.$el, () => {
+      this.currentActivity = !0, this.disable(), h(this.$el, () => {
         this.$el.classList.add("btn-activity"), this.$emit("show-activity");
       });
     },
@@ -359,28 +262,6 @@ const tt = function(t) {
     }
   }
 };
-function it(t, e, i, n, s, a) {
-  const o = x("activity-indicator"), _ = x("btn");
-  return c(), m(_, {
-    active: i.active,
-    block: i.block,
-    disabled: i.disabled,
-    size: i.size,
-    tag: i.tag,
-    variant: i.variant,
-    class: z(a.classes),
-    onClick: e[0] || (e[0] = (l) => !i.disabled && t.$emit("click", l, this))
-  }, {
-    default: $(() => [
-      A(t.$slots, "default", {}, () => [
-        B(f(i.label), 1)
-      ]),
-      D(o, L(j(a.indicatorProps)), null, 16)
-    ]),
-    _: 3
-  }, 8, ["active", "block", "disabled", "size", "tag", "variant", "class"]);
-}
-const st = /* @__PURE__ */ g(et, [["render", it]]);
 export {
-  st as BtnActivity
+  L as BtnActivity
 };

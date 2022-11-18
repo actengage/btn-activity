@@ -1,24 +1,9 @@
-<template>
-    <btn
-        :active="active"
-        :block="block"
-        :disabled="disabled"
-        :size="size"
-        :tag="tag"
-        :variant="variant"
-        :class="classes"
-        @click="(e) => !disabled && $emit('click', e, this)">
-        <slot>{{ label }}</slot>
-        <activity-indicator v-bind="indicatorProps" />
-    </btn>
-</template>
-
-<script>
+<script lang="ts">
 import { ActivityIndicator } from '@vue-interface/activity-indicator';
 import { Btn } from '@vue-interface/btn';
 
-const convertAnimationDelayToInt = function(delay) {
-    const num = parseFloat(delay || 0, 10);
+const convertAnimationDelayToInt = function(delay: any) {
+    const num = parseFloat(delay || 0);
     const matches = delay && delay.match(/m?s/);
     const unit = matches ? matches[0] : false;
 
@@ -37,12 +22,10 @@ const convertAnimationDelayToInt = function(delay) {
     return milliseconds || 0;
 };
 
-const animated = function(el, callback) {
+const animated = function(el: HTMLElement, callback: Function) {
     const defaultView = (el.ownerDocument || document).defaultView;
 
-    setTimeout(() => {
-        callback.apply();
-    }, convertAnimationDelayToInt(defaultView.getComputedStyle(el).animationDuration));
+    setTimeout(callback, convertAnimationDelayToInt(defaultView?.getComputedStyle(el).animationDuration));
 };
 
 export default {
@@ -153,16 +136,13 @@ export default {
          * @return void
          */
         classes() {
-            const classes = {
+            return {
                 'disabled': this.disabled,
                 'active': this.active,
-                'btn-activity': this.activity
+                'btn-activity': this.activity,
+                [`btn-activity-${this.orientation.replace('btn-activity-', '')}`]: !!this.orientation,
+                [`'btn-activity-indicator-${this.indicatorProps.type.replace('btn-activity-indicator-', '')}`]: !!this.indicatorProps.type,
             };
-
-            classes['btn-activity-' + this.orientation.replace('btn-activity-', '')] = !!this.orientation;
-            classes['btn-activity-indicator-' + this.indicatorProps.type.replace('btn-activity-indicator-', '')] = !!this.indicatorProps.type;
-
-            return classes;
         },
 
         indicatorProps() {
@@ -177,7 +157,7 @@ export default {
 
     watch: {
 
-        activity(value) {
+        activity(value: boolean) {
             if(value) {
                 this.showActivity();
             }
