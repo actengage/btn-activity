@@ -43,11 +43,7 @@ declare const _sfc_main: {
                     minWidth: string | undefined;
                     height: string | undefined;
                     maxHeight: string | undefined;
-                    minHeight: string | undefined; /**
-                     * Disable the button.
-                     *
-                     * @property {Boolean}
-                     */
+                    minHeight: string | undefined;
                 };
             };
             mounted(): Promise<void>;
@@ -81,15 +77,15 @@ declare const _sfc_main: {
                 };
             })[];
             props: {
-                active: BooleanConstructor;
+                active: BooleanConstructor; /**
+                 * Make the button appear with the active state.
+                 *
+                 * @property {Boolean}
+                 */
                 block: BooleanConstructor;
                 componentPrefix: {
                     type: StringConstructor;
-                    default: string; /**
-                     * Display the button as block width.
-                     *
-                     * @property {Boolean}
-                     */
+                    default: string;
                 };
                 disabled: BooleanConstructor;
                 label: StringConstructor;
@@ -194,7 +190,7 @@ declare const _sfc_main: {
             [x: string]: any;
             disabled: any;
             active: any;
-            'btn-activity': any;
+            "btn-activity": any;
         };
         indicatorProps(): any;
     };

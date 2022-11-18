@@ -178,7 +178,10 @@ const W = /* @__PURE__ */ N(k, [["render", H]]), D = function(t) {
   return s || 0;
 }, h = function(t, e) {
   const i = (t.ownerDocument || document).defaultView;
-  setTimeout(e, D(i == null ? void 0 : i.getComputedStyle(t).animationDuration));
+  setTimeout(
+    e,
+    D(i == null ? void 0 : i.getComputedStyle(t).animationDuration)
+  );
 }, L = {
   name: "BtnActivity",
   components: {
@@ -221,15 +224,21 @@ const W = /* @__PURE__ */ N(k, [["render", H]]), D = function(t) {
         active: this.active,
         "btn-activity": this.activity,
         [`btn-activity-${this.orientation.replace("btn-activity-", "")}`]: !!this.orientation,
-        [`'btn-activity-indicator-${this.indicatorProps.type.replace("btn-activity-indicator-", "")}`]: !!this.indicatorProps.type
+        [`'btn-activity-indicator-${this.indicatorProps.type.replace(
+          "btn-activity-indicator-",
+          ""
+        )}`]: !!this.indicatorProps.type
       };
     },
     indicatorProps() {
-      return Object.assign({
-        type: "spinner"
-      }, (typeof this.indicator == "string" ? {
-        type: this.indicator
-      } : this.indicator) || {});
+      return Object.assign(
+        {
+          type: "spinner"
+        },
+        (typeof this.indicator == "string" ? {
+          type: this.indicator
+        } : this.indicator) || {}
+      );
     }
   },
   watch: {
