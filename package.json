@@ -11,8 +11,8 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/btn-activit.es.js",
-      "require": "./dist/btn-activit.umd.js",
+      "import": "./dist/btn-activity.es.js",
+      "require": "./dist/btn-activity.umd.js",
       "types": "./dist/index.d.ts"
     }
   },
