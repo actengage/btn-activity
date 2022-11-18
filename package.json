@@ -16,7 +16,8 @@
       "import": "./dist/btn-activity.js",
       "require": "./dist/btn-activity.umd.cjs",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./dist/style.css": "./dist/style.css"
   },
   "browserslist": "last 2 versions, > 0.5%, ie >= 11",
   "scripts": {
