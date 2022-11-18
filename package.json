@@ -49,8 +49,8 @@
   },
   "homepage": "https://github.com/vue-interface/btn-activity/docs#readme",
   "dependencies": {
-    "@vue-interface/activity-indicator": "^2.0.0-beta.6",
-    "@vue-interface/btn": "^3.0.0-beta.3"
+    "@vue-interface/activity-indicator": "^2.0.0-beta.7",
+    "@vue-interface/btn": "^3.0.0-beta.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.1.2",
