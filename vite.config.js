@@ -23,12 +23,7 @@ export default defineConfig({
                 globals: {
                     vue: 'Vue'
                 },
-            },
-            // plugins: [
-            //     babel({
-            //         babelHelpers: 'bundled'
-            //     })
-            // ]
+            }
         },
         watch: !process.env.NODE_ENV && {
             include: [

@@ -2,17 +2,19 @@
   "name": "@vue-interface/btn-activity",
   "version": "2.0.0-beta.5",
   "description": "A Vue activity button component.",
+  "type": "module",
   "files": [
     "index.js",
     "dist"
   ],
-  "main": "./dist/btn-activity.umd.js",
-  "module": "./dist/btn-activity.es.js",
+  "main": "./dist/btn-activity.umd.cjs",
+  "module": "./dist/btn-activity.js",
+  "style": "./dist/style.css",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/btn-activity.es.js",
-      "require": "./dist/btn-activity.umd.js",
+      "import": "./dist/btn-activity.js",
+      "require": "./dist/btn-activity.umd.cjs",
       "types": "./dist/index.d.ts"
     }
   },
@@ -46,11 +48,10 @@
   },
   "homepage": "https://github.com/vue-interface/btn-activity/docs#readme",
   "dependencies": {
-    "@vue-interface/activity-indicator": "^2.0.0-beta.4",
+    "@vue-interface/activity-indicator": "^2.0.0-beta.6",
     "@vue-interface/btn": "^3.0.0-beta.3"
   },
   "devDependencies": {
-    "@rollup/plugin-babel": "^6.0.0",
     "@vitejs/plugin-vue": "^3.1.2",
     "autoprefixer": "^10.4.2",
     "babel-eslint": "^10.1.0",

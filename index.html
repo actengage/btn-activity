@@ -123,15 +123,10 @@
         <script type="module">
             import './index.css';
             import { createApp } from 'vue/dist/vue.esm-bundler';
-            import { BtnActivity } from './index.js';
+            import { BtnActivity } from './index.ts';
 
-            import { register, Dots, Spinner, Pulse } from '@vue-interface/activity-indicator';
-
-            register({
-                Dots,
-                Spinner,
-                Pulse,
-            });
+            import { ActivityIndicatorPlugin, Dots, Spinner, Pulse } from '@vue-interface/activity-indicator';
+            import '@vue-interface/activity-indicator/dist/style.css'
 
             const vue = createApp({
                 components: {
@@ -162,6 +157,13 @@
                     }, 1000);
 
                     toggle()
+                }
+            })
+            .use(ActivityIndicatorPlugin, {
+                indicators: {
+                    Dots,
+                    Spinner,
+                    Pulse,
                 }
             })
             .mount('#app');
