@@ -1,244 +1,252 @@
-<template>
-	<btn
-		:active="active"
-		:block="block"
-		:disabled="disabled"
-		:size="size"
-		:tag="tag"
-		:variant="variant"
-		:class="classes"
-		@click="!disabled && $emit('click', $event, {
-			disable,
-			enable,
-			toggle,
-			showActivity,
-			hideActivity,
-		})"
-		v-bind="Object.assign({}, $attrs, { onClick: undefined })">
-		<slot>{{ label }}</slot>
-		<activity-indicator v-bind="indicatorProps" />
-	</btn>
-</template>
-
 <script lang="ts">
-import { ActivityIndicator } from "@vue-interface/activity-indicator";
-import { Btn } from "@vue-interface/btn";
-import { defineComponent } from "vue";
+import { ActivityIndicator } from '@vue-interface/activity-indicator';
+import { Btn } from '@vue-interface/btn';
+import { defineComponent } from 'vue';
 
 const convertAnimationDelayToInt = function (delay: any) {
-	const num = parseFloat(delay || 0);
-	const matches = delay && delay.match(/m?s/);
-	const unit = matches ? matches[0] : false;
+    const num = parseFloat(delay || 0);
+    const matches = delay && delay.match(/m?s/);
+    const unit = matches ? matches[0] : false;
 
-	let milliseconds;
+    let milliseconds;
 
-	switch (unit) {
-		case "s": // seconds
-			milliseconds = num * 1000;
-			break;
-		case "ms":
-		default:
-			milliseconds = num;
-			break;
-	}
+    switch (unit) {
+        case 's': // seconds
+            milliseconds = num * 1000;
+            break;
+        case 'ms':
+        default:
+            milliseconds = num;
+            break;
+    }
 
-	return milliseconds || 0;
+    return milliseconds || 0;
 };
 
 const animated = function (el: HTMLElement, callback: Function) {
-	const defaultView = (el.ownerDocument || document).defaultView;
+    const defaultView = (el.ownerDocument || document).defaultView;
 
-	setTimeout(
-		callback,
-		convertAnimationDelayToInt(
-			defaultView?.getComputedStyle(el).animationDuration
-		)
-	);
+    setTimeout(
+        callback,
+        convertAnimationDelayToInt(
+            defaultView?.getComputedStyle(el).animationDuration
+        )
+    );
 };
 
 export default defineComponent({
-	inheritAttrs: false,
 
-	components: {
-		ActivityIndicator,
-		Btn,
-	},
+    components: {
+        ActivityIndicator,
+        Btn,
+    },
 
-	props: {
-		/**
+    inheritAttrs: false,
+
+    props: {
+        /**
 		 * Make the button appear with the active state.
 		 */
-		active: Boolean,
+        active: Boolean,
 
-		/**
+        /**
 		 * Show the activity indicator inside the button.
 		 */
-		activity: Boolean,
+        activity: Boolean,
 
-		/**
+        /**
 		 * Display the button as block width.
 		 */
-		block: Boolean,
+        block: Boolean,
 
-		/**
+        /**
 		 * Disable the button.
 		 */
-		disabled: Boolean,
+        disabled: Boolean,
 
-		/**
+        /**
 		 * The type of activity indicator inside the button.
 		 */
-		indicator: {
-			type: [Object, String],
-			default: "spinner",
-		},
+        indicator: {
+            type: [Object, String],
+            default: 'spinner',
+        },
 
-		/**
+        /**
 		 * The button label.
 		 */
-		label: String,
+        label: {
+            type: String,
+            default: undefined
+        },
 
-		/**
+        /**
 		 * The orientation of the activity button inside the button.
 		 */
-		orientation: {
-			type: String,
-			default: "right",
-		},
+        orientation: {
+            type: String,
+            default: 'right',
+        },
 
-		/**
+        /**
 		 * The size of the button.
 		 */
-		size: {
-			type: String,
-			default: "md",
-		},
+        size: {
+            type: String,
+            default: 'md',
+        },
 
-		/**
+        /**
 		 * The HTML tag.
 		 */
-		tag: String,
+        tag: {
+            type: String,
+            default: undefined
+        },
 
-		/**
+        /**
 		 * The variant of the button.
 		 */
-		variant: {
-			type: String,
-			default: "primary",
-		},
-	},
+        variant: {
+            type: String,
+            default: 'primary',
+        },
+    },
 
-	data() {
-		return {
-			currentActivity: this.activity,
-		};
-	},
+    emits: ['click', 'hide-activity', 'show-activity'],
 
-	computed: {
-		/**
+    data() {
+        return {
+            currentActivity: this.activity,
+        };
+    },
+
+    computed: {
+        /**
 		 * An object of classes to append to the button.
 		 */
-		classes() {
-			return {
-				disabled: this.disabled,
-				active: this.active,
-				"btn-activity": this.activity,
-				[`btn-activity-${this.orientation.replace("btn-activity-", "")}`]:
-					!!this.orientation,
-				[`'btn-activity-indicator-${this.indicatorProps.type.replace(
-					"btn-activity-indicator-",
-					""
-				)}`]: !!this.indicatorProps.type,
-			};
-		},
+        classes() {
+            return {
+                disabled: this.disabled,
+                active: this.active,
+                'btn-activity': this.activity,
+                [`btn-activity-${this.orientation.replace('btn-activity-', '')}`]: !!this.orientation,
+                [`btn-activity-indicator-${this.indicatorProps.type.replace('btn-activity-indicator-', '')}`]: !!this.indicatorProps.type,
+            };
+        },
 
-		indicatorProps() {
-			return Object.assign(
-				{
-					type: "spinner",
-				},
-				(typeof this.indicator === "string"
-					? {
-						type: this.indicator,
-					}
-					: this.indicator) || {}
-			);
-		},
-	},
+        indicatorProps() {
+            return Object.assign(
+                {
+                    type: 'spinner',
+                },
+                (typeof this.indicator === 'string'
+                    ? {
+                        type: this.indicator,
+                    }
+                    : this.indicator) || {}
+            );
+        },
+    },
 
-	watch: {
-		activity(value: boolean) {
-			if (value) {
-				this.showActivity();
-			} else {
-				this.hideActivity();
-			}
-		},
-	},
+    watch: {
+        activity(value: boolean) {
+            if(value) {
+                this.showActivity();
+            } else {
+                this.hideActivity();
+            }
+        },
+    },
 
-	mounted() {
-		if (this.activity) {
-			this.showActivity();
-		}
-	},
+    mounted() {
+        if(this.activity) {
+            this.showActivity();
+        }
+    },
 
-	methods: {
-		/**
+    methods: {
+        /**
 		 * Disable the button.
 		 */
-		disable(): void {
-			this.$el.disabled = true;
-			this.$el.classList.add("disabled");
-		},
+        disable(): void {
+            this.$el.disabled = true;
+            this.$el.classList.add('disabled');
+        },
 
-		/**
+        /**
 		 * Enable the button.
 		 */
-		enable(): void {
-			this.$el.disabled = false;
-			this.$el.classList.remove("disabled");
-		},
+        enable(): void {
+            this.$el.disabled = false;
+            this.$el.classList.remove('disabled');
+        },
 
-		/**
+        /**
 		 * Hide the activity indicator inside the button.
 		 */
-		hideActivity(): void {
-			this.$el.classList.add("btn-hide-activity");
+        hideActivity(): void {
+            this.$el.classList.add('btn-hide-activity');
 
-			animated(this.$el, () => {
-				this.enable();
-				this.currentActivity = false;
-				this.$el.classList.remove("btn-activity", "btn-hide-activity");
-				this.$emit("hide-activity");
-			});
-		},
+            animated(this.$el, () => {
+                if(!this.disabled) {
+                	this.enable();
+                }
+				
+                this.currentActivity = false;
+                this.$el.classList.remove('btn-activity', 'btn-hide-activity');
+                this.$emit('hide-activity');
+            });
+        },
 
-		/**
+        /**
 		 * Show the activity indicator inside the button.
 		 */
-		showActivity(): void {
-			this.currentActivity = true;
-			this.disable();
+        showActivity(): void {
+            this.currentActivity = true;
+            this.disable();
 
-			animated(this.$el, () => {
-				this.$el.classList.add("btn-activity");
-				this.$emit("show-activity");
-			});
-		},
+            animated(this.$el, () => {
+                this.$el.classList.add('btn-activity');
+                this.$emit('show-activity');
+            });
+        },
 
-		/**
+        /**
 		 * Show the activity indicator inside the button.
 		 */
-		toggle(): void {
-			if (!this.currentActivity) {
-				this.showActivity();
-			} else {
-				this.hideActivity();
-			}
-		},
-	},
+        toggle(): void {
+            if(!this.currentActivity) {
+                this.showActivity();
+            } else {
+                this.hideActivity();
+            }
+        },
+    },
 });
 </script>
+
+<template>
+    <btn
+        :active="active"
+        :block="block"
+        :disabled="disabled"
+        :size="size"
+        :tag="tag"
+        :variant="variant"
+        :class="classes"
+        v-bind="Object.assign({}, $attrs, { onClick: undefined })"
+        @click="!disabled && $emit('click', $event, {
+            disable,
+            enable,
+            toggle,
+            showActivity,
+            hideActivity,
+        })">
+        <slot>{{ label }}</slot>
+        <activity-indicator v-bind="indicatorProps" />
+    </btn>
+</template>
 
 <style>
 @keyframes btn-activity-in {

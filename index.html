@@ -100,6 +100,10 @@
                 {{ activity ? 'On' : 'Off' }}
             </btn-activity>
 
+            <btn-activity indicator="spinner" :activity="activity" :disabled="true">
+                {{ activity ? 'On' : 'Off' }}
+            </btn-activity>
+
             <h2 class="text-2xl mt-6 mb-3">Disabled</h2>
 
             <btn-activity indicator="spinner" disabled @click="onClick">Spinner Top</btn-activity>

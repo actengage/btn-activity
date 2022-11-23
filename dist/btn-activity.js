@@ -1,4 +1,4 @@
-import { defineComponent as b, inject as O, openBlock as a, createElementBlock as g, normalizeClass as j, normalizeStyle as N, createElementVNode as E, createBlock as f, resolveDynamicComponent as x, createCommentVNode as $, toDisplayString as y, mergeProps as w, withCtx as A, renderSlot as C, createTextVNode as k, resolveComponent as P, createVNode as _, normalizeProps as H, guardReactiveProps as R } from "vue";
+import { defineComponent as b, inject as O, openBlock as a, createElementBlock as g, normalizeClass as j, normalizeStyle as N, createElementVNode as E, createBlock as y, resolveDynamicComponent as x, createCommentVNode as $, toDisplayString as f, mergeProps as w, withCtx as A, renderSlot as C, createTextVNode as k, resolveComponent as P, createVNode as _, normalizeProps as H, guardReactiveProps as R } from "vue";
 function r(t, i = "px") {
   return t != null && t !== !1 && isFinite(t) ? `${t}${i}` : t;
 }
@@ -78,11 +78,11 @@ function I(t, i, e, n, s, o) {
     style: N(t.style)
   }, [
     E("div", D, [
-      t.is ? (a(), f(x(t.is()), {
+      t.is ? (a(), y(x(t.is()), {
         key: 0,
         class: "mx-auto"
       })) : $("", !0),
-      t.label ? (a(), g("div", L, y(t.label), 1)) : $("", !0)
+      t.label ? (a(), g("div", L, f(t.label), 1)) : $("", !0)
     ])
   ], 6);
 }
@@ -103,11 +103,11 @@ function q(t) {
 var G = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g], J = /[^A-Z0-9]+/gi;
 function K(t, i) {
   i === void 0 && (i = {});
-  for (var e = i.splitRegexp, n = e === void 0 ? G : e, s = i.stripRegexp, o = s === void 0 ? J : s, c = i.transform, p = c === void 0 ? q : c, l = i.delimiter, B = l === void 0 ? " " : l, h = S(S(t, n, "$1\0$2"), o, "\0"), v = 0, m = h.length; h.charAt(v) === "\0"; )
-    v++;
+  for (var e = i.splitRegexp, n = e === void 0 ? G : e, s = i.stripRegexp, o = s === void 0 ? J : s, c = i.transform, v = c === void 0 ? q : c, l = i.delimiter, B = l === void 0 ? " " : l, h = S(S(t, n, "$1\0$2"), o, "\0"), p = 0, m = h.length; h.charAt(p) === "\0"; )
+    p++;
   for (; h.charAt(m - 1) === "\0"; )
     m--;
-  return h.slice(v, m).split("\0").map(p).join(B);
+  return h.slice(p, m).split("\0").map(v).join(B);
 }
 function S(t, i, e) {
   return i instanceof RegExp ? t.replace(i, e) : i.reduce(function(n, s) {
@@ -230,14 +230,14 @@ const Y = {
   return e;
 };
 function st(t, i, e, n, s, o) {
-  return a(), f(x(t.component), w(t.$attrs, {
+  return a(), y(x(t.component), w(t.$attrs, {
     disabled: t.disabled,
     class: t.classes,
     role: "button"
   }), {
     default: A(() => [
       C(t.$slots, "default", {}, () => [
-        k(y(t.label), 1)
+        k(f(t.label), 1)
       ])
     ]),
     _: 3
@@ -265,11 +265,11 @@ const nt = /* @__PURE__ */ et(it, [["render", st]]), rt = function(t) {
     )
   );
 }, at = b({
-  inheritAttrs: !1,
   components: {
     ActivityIndicator: Z,
     Btn: nt
   },
+  inheritAttrs: !1,
   props: {
     active: Boolean,
     activity: Boolean,
@@ -279,7 +279,10 @@ const nt = /* @__PURE__ */ et(it, [["render", st]]), rt = function(t) {
       type: [Object, String],
       default: "spinner"
     },
-    label: String,
+    label: {
+      type: String,
+      default: void 0
+    },
     orientation: {
       type: String,
       default: "right"
@@ -288,12 +291,16 @@ const nt = /* @__PURE__ */ et(it, [["render", st]]), rt = function(t) {
       type: String,
       default: "md"
     },
-    tag: String,
+    tag: {
+      type: String,
+      default: void 0
+    },
     variant: {
       type: String,
       default: "primary"
     }
   },
+  emits: ["click", "hide-activity", "show-activity"],
   data() {
     return {
       currentActivity: this.activity
@@ -306,10 +313,7 @@ const nt = /* @__PURE__ */ et(it, [["render", st]]), rt = function(t) {
         active: this.active,
         "btn-activity": this.activity,
         [`btn-activity-${this.orientation.replace("btn-activity-", "")}`]: !!this.orientation,
-        [`'btn-activity-indicator-${this.indicatorProps.type.replace(
-          "btn-activity-indicator-",
-          ""
-        )}`]: !!this.indicatorProps.type
+        [`btn-activity-indicator-${this.indicatorProps.type.replace("btn-activity-indicator-", "")}`]: !!this.indicatorProps.type
       };
     },
     indicatorProps() {
@@ -340,7 +344,7 @@ const nt = /* @__PURE__ */ et(it, [["render", st]]), rt = function(t) {
     },
     hideActivity() {
       this.$el.classList.add("btn-hide-activity"), z(this.$el, () => {
-        this.enable(), this.currentActivity = !1, this.$el.classList.remove("btn-activity", "btn-hide-activity"), this.$emit("hide-activity");
+        this.disabled || this.enable(), this.currentActivity = !1, this.$el.classList.remove("btn-activity", "btn-hide-activity"), this.$emit("hide-activity");
       });
     },
     showActivity() {
@@ -360,15 +364,16 @@ const ot = (t, i) => {
   return e;
 };
 function ct(t, i, e, n, s, o) {
-  const c = P("activity-indicator"), p = P("btn");
-  return a(), f(p, w({
+  const c = P("activity-indicator"), v = P("btn");
+  return a(), y(v, w({
     active: t.active,
     block: t.block,
     disabled: t.disabled,
     size: t.size,
     tag: t.tag,
     variant: t.variant,
-    class: t.classes,
+    class: t.classes
+  }, Object.assign({}, t.$attrs, { onClick: void 0 }), {
     onClick: i[0] || (i[0] = (l) => !t.disabled && t.$emit("click", l, {
       disable: t.disable,
       enable: t.enable,
@@ -376,10 +381,10 @@ function ct(t, i, e, n, s, o) {
       showActivity: t.showActivity,
       hideActivity: t.hideActivity
     }))
-  }, Object.assign({}, t.$attrs, { onClick: void 0 })), {
+  }), {
     default: A(() => [
       C(t.$slots, "default", {}, () => [
-        k(y(t.label), 1)
+        k(f(t.label), 1)
       ]),
       _(c, H(R(t.indicatorProps)), null, 16)
     ]),

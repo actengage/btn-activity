@@ -25,7 +25,10 @@ declare const _sfc_main: import("vue").DefineComponent<{
     /**
      * The button label.
      */
-    label: StringConstructor;
+    label: {
+        type: StringConstructor;
+        default: undefined;
+    };
     /**
      * The orientation of the activity button inside the button.
      */
@@ -43,7 +46,10 @@ declare const _sfc_main: import("vue").DefineComponent<{
     /**
      * The HTML tag.
      */
-    tag: StringConstructor;
+    tag: {
+        type: StringConstructor;
+        default: undefined;
+    };
     /**
      * The variant of the button.
      */
@@ -61,7 +67,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         [x: string]: any;
         disabled: any;
         active: any;
-        "btn-activity": any;
+        'btn-activity': any;
     };
     indicatorProps(): any;
 }, {
@@ -85,7 +91,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
      * Show the activity indicator inside the button.
      */
     toggle(): void;
-}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("click" | "hide-activity" | "show-activity")[], "click" | "hide-activity" | "show-activity", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     /**
      * Make the button appear with the active state.
      */
@@ -112,7 +118,10 @@ declare const _sfc_main: import("vue").DefineComponent<{
     /**
      * The button label.
      */
-    label: StringConstructor;
+    label: {
+        type: StringConstructor;
+        default: undefined;
+    };
     /**
      * The orientation of the activity button inside the button.
      */
@@ -130,7 +139,10 @@ declare const _sfc_main: import("vue").DefineComponent<{
     /**
      * The HTML tag.
      */
-    tag: StringConstructor;
+    tag: {
+        type: StringConstructor;
+        default: undefined;
+    };
     /**
      * The variant of the button.
      */
@@ -138,11 +150,17 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: StringConstructor;
         default: string;
     };
-}>>, {
+}>> & {
+    onClick?: ((...args: any[]) => any) | undefined;
+    "onHide-activity"?: ((...args: any[]) => any) | undefined;
+    "onShow-activity"?: ((...args: any[]) => any) | undefined;
+}, {
+    label: string;
     size: string;
     active: boolean;
     block: boolean;
     disabled: boolean;
+    tag: string;
     variant: string;
     activity: boolean;
     indicator: string | Record<string, any>;
