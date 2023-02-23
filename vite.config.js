@@ -15,10 +15,16 @@ export default defineConfig({
             fileName,
         },
         rollupOptions: {
-            external: ['vue'],
+            external: [
+                '@vue-interface/activity-indicator',
+                '@vue-interface/btn',
+                'vue'
+            ],
             output: {
                 globals: {
-                    vue: 'Vue'
+                    '@vue-interface/activity-indicator': 'ActivityIndicator',
+                    '@vue-interface/btn': 'Btn',
+                    'vue': 'Vue'
                 },
             }
         },
