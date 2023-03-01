@@ -11,13 +11,13 @@ const convertAnimationDelayToInt = function (delay: any) {
     let milliseconds;
 
     switch (unit) {
-        case 's': // seconds
-            milliseconds = num * 1000;
-            break;
-        case 'ms':
-        default:
-            milliseconds = num;
-            break;
+    case 's': // seconds
+        milliseconds = num * 1000;
+        break;
+    case 'ms':
+    default:
+        milliseconds = num;
+        break;
     }
 
     return milliseconds || 0;
@@ -227,7 +227,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <btn
+    <Btn
         :active="active"
         :block="block"
         :disabled="disabled"
@@ -244,8 +244,8 @@ export default defineComponent({
             hideActivity,
         })">
         <slot>{{ label }}</slot>
-        <activity-indicator v-bind="indicatorProps" />
-    </btn>
+        <ActivityIndicator v-bind="indicatorProps" />
+    </Btn>
 </template>
 
 <style>
