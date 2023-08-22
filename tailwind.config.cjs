@@ -1,14 +1,11 @@
 module.exports = {
     content: [
-        "./index.html"
+        './index.html'
     ],
     theme: {
         extend: {},
     },
     plugins: [
-        require('@vue-interface/btn/tailwindcss')
-    ],
-    safelist: [
-        ...require('@vue-interface/btn/tailwindcss/safelist')()
+        require('@vue-interface/btn/tailwindcss')()
     ]
 };

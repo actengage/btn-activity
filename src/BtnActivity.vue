@@ -68,8 +68,8 @@ export default defineComponent({
 		 * The type of activity indicator inside the button.
 		 */
         indicator: {
-            type: [Object, String],
-            default: 'spinner',
+            type: Object,
+            required: true
         },
 
         /**
@@ -89,27 +89,11 @@ export default defineComponent({
         },
 
         /**
-		 * The size of the button.
-		 */
-        size: {
-            type: String,
-            default: 'md',
-        },
-
-        /**
 		 * The HTML tag.
 		 */
         tag: {
             type: String,
             default: undefined
-        },
-
-        /**
-		 * The variant of the button.
-		 */
-        variant: {
-            type: String,
-            default: 'primary',
         },
     },
 
@@ -127,8 +111,6 @@ export default defineComponent({
 		 */
         classes() {
             return {
-                disabled: this.disabled,
-                active: this.active,
                 'btn-activity': this.activity,
                 [`btn-activity-${this.orientation.replace('btn-activity-', '')}`]: !!this.orientation,
                 [`btn-activity-indicator-${this.indicatorProps.type.replace('btn-activity-indicator-', '')}`]: !!this.indicatorProps.type,
@@ -231,9 +213,7 @@ export default defineComponent({
         :active="active"
         :block="block"
         :disabled="disabled"
-        :size="size"
         :tag="tag"
-        :variant="variant"
         :class="classes"
         v-bind="Object.assign({}, $attrs, { onClick: undefined })"
         @click="!disabled && $emit('click', $event, {
