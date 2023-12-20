@@ -1,3 +1,11 @@
+# [2.0.0-beta.17](https://github.com/vue-interface/btn-activity/compare/v2.0.0-beta.16...v2.0.0-beta.17) (2023-12-20)
+
+
+### Bug Fixes
+
+* refactored into composable and removed .css dep ([533c258](https://github.com/vue-interface/btn-activity/commit/533c2589e92e6bd6cab5f4fe8c9e778bb8844f1b))
+* updated btn to latest ([c03e232](https://github.com/vue-interface/btn-activity/commit/c03e232908a6862b6dddec214d0b5a13731e76cb))
+
 # [2.0.0-beta.16](https://github.com/vue-interface/btn-activity/compare/v2.0.0-beta.15...v2.0.0-beta.16) (2023-09-26)
 
 
