@@ -1,6 +1,8 @@
 module.exports = {
     content: [
-        './index.html'
+        './index.html',
+        './src/*.vue',
+        './node_modules/@vue-interface/btn/src/*.{vue,ts,js}'
     ],
     theme: {
         extend: {},

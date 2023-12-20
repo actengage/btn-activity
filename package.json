@@ -8,15 +8,13 @@
   ],
   "main": "./dist/btn-activity.umd.cjs",
   "module": "./dist/btn-activity.js",
-  "style": "./dist/style.css",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/btn-activity.js",
       "require": "./dist/btn-activity.umd.cjs",
       "types": "./dist/index.d.ts"
-    },
-    "./dist/style.css": "./dist/style.css"
+    }
   },
   "browserslist": "last 2 versions, > 0.5%, ie >= 11",
   "scripts": {
@@ -43,8 +41,8 @@
   },
   "homepage": "https://github.com/vue-interface/btn-activity",
   "dependencies": {
-    "@vue-interface/activity-indicator": "^2.0.0-beta.7",
-    "@vue-interface/btn": "^3.0.0-beta.21"
+    "@vue-interface/activity-indicator": "^2.0.0-beta.20",
+    "@vue-interface/btn": "^3.0.0-beta.23"
   },
   "peerDependencies": {
     "vue": "^3.3.4"
