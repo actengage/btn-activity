@@ -42,7 +42,7 @@
   "homepage": "https://github.com/vue-interface/btn-activity",
   "dependencies": {
     "@vue-interface/activity-indicator": "^2.0.0-beta.20",
-    "@vue-interface/btn": "^3.0.0-beta.23"
+    "@vue-interface/btn": "^3.0.0-beta.24"
   },
   "peerDependencies": {
     "vue": "^3.3.4"
